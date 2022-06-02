@@ -6,7 +6,7 @@ Subject: [PATCH] Starlivht config file
 
 diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..b816e8d0bb729fecab226f0d39d0ddd56671b0ae
+index 0000000000000000000000000000000000000000..2fa2fbc1a8d0dd249d883068706e843393ecb2db
 --- /dev/null
 +++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 @@ -0,0 +1,161 @@
@@ -49,7 +49,7 @@ index 0000000000000000000000000000000000000000..b816e8d0bb729fecab226f0d39d0ddd5
 +
 +@SuppressWarnings("unused")
 +public class StarlivhtConfig {
-+    private static final String HEADER = "Configuration file for Starlivht."
++    private static final String HEADER = "Configuration file for Starlivht.";
 +    private static File CONFIG_FILE;
 +    public static YamlConfiguration config;
 +
