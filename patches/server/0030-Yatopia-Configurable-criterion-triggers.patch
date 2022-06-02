@@ -9,13 +9,17 @@ Original code by YatopiaMC, licensed under MIT
 You can find the original code on https://github.com/YatopiaMC/Yatopia
 
 diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-index 3d2d8834c17db7f9b7d8124573581fe5a5a69010..6bc57ac8daef7ab049742b5b9e0afd5e618a64d2 100644
+index c10192d5a05122cbfa9968d2f378bec0530de9ac..886c6337ca91d342b69a30905347b4eed2b94609 100644
 --- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 +++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-@@ -174,4 +174,13 @@ public class StarlivhtConfig {
-         riskyMathRoundOpt = getBoolean("use-risky-mathround-opt", riskyMathRoundOpt);
-     }
+@@ -171,7 +171,16 @@ public class StarlivhtConfig {
  
+     public static boolean metrics = false;
+     private static void allowServerMetrics() {
+-        serverMetrics = getBoolean("metrics", metrics);
++        metrics = getBoolean("metrics", metrics);
++    }
++
 +    public static boolean criterionTriggerEnterBlock = true;
 +    public static boolean criterionTriggerTick = true;
 +    public static boolean criterionTriggerLocation = true;
@@ -23,8 +27,8 @@ index 3d2d8834c17db7f9b7d8124573581fe5a5a69010..6bc57ac8daef7ab049742b5b9e0afd5e
 +        criterionTriggerEnterBlock = getBoolean("criterion-trigger.enter-block", criterionTriggerEnterBlock);
 +        criterionTriggerTick = getBoolean("criterion-trigger.tick", criterionTriggerTick);
 +        criterionTriggerLocation = getBoolean("criterion-trigger.location", criterionTriggerLocation);
-+    }
-+
+     }
+ 
  }
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 index a6edf5117d4ae03d8294e7bb74dd2d77048895a5..d5044a1e38febb884c336cba378c2863c589cec8 100644

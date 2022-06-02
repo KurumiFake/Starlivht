@@ -1,0 +1,34 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Thu, 2 Jun 2022 19:16:20 +0200
+Subject: [PATCH] configurable metrics
+
+slightly modified ver of Mirai's
+
+diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
+index 560e83f1e70cc2712e9c08ffd5e2cab8a6de687b..7eebdc6de80f64d6ddf3446a7f3e7f11c7878509 100644
+--- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
++++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
+@@ -123,7 +123,7 @@ public class PaperConfig {
+             MinecraftServer.getServer().server.getCommandMap().register(entry.getKey(), "Paper", entry.getValue());
+         }
+ 
+-        if (!metricsStarted) {
++        if (com.shinamc.starlivht.StarlivhtConfig.metrics && !metricsStarted) { // Starlivht - configurable metrics
+             Metrics.PaperMetrics.startMetrics();
+             metricsStarted = true;
+         }
+diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
+index 8210bf9dc950103360392c964ab893c57a8452d9..c10192d5a05122cbfa9968d2f378bec0530de9ac 100644
+--- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
++++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
+@@ -169,4 +169,9 @@ public class StarlivhtConfig {
+         riskyMathRoundOpt = getBoolean("use-risky-mathround-opt", riskyMathRoundOpt);
+     }
+ 
++    public static boolean metrics = false;
++    private static void allowServerMetrics() {
++        serverMetrics = getBoolean("metrics", metrics);
++    }
++
+ }
