@@ -1,0 +1,29 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Thu, 2 Jun 2022 20:03:06 +0200
+Subject: [PATCH] Starlivht config file
+
+
+diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index 79b26045a68ebb9b01e5bd06abbccaaef5489777..65518ec5a0c56aa5ce0d41b2898012c1f4ec50c0 100644
+--- a/src/main/java/org/bukkit/Server.java
++++ b/src/main/java/org/bukkit/Server.java
+@@ -1897,6 +1897,18 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+         }
+         // Paper end
+ 
++        // Starlivht start
++        @NotNull
++        public org.bukkit.configuration.file.YamlConfiguration getStarlivhtConfig() {
++            throw new UnsupportedOperationException("Not supported yet.");
++        }
++
++        @NotNull
++        public java.util.Properties getServerProperties() {
++            throw new UnsupportedOperationException("Not supported yet.");
++        }
++        // Starlivht end
++
+         /**
+          * Sends the component to the player
+          *
