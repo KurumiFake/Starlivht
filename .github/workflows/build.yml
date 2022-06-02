@@ -30,7 +30,7 @@ jobs:
         if: github.ref_name == 'ver/1.18.2'
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ github.run_number }}"
+          automatic_release_tag: "1.18.2-${{ github.run_number }}"
           prerelease: false
           title: "Starlivht ${{ steps.relInfo.outputs.mcversion }} ${{ steps.relInfo.outputs.date }} ${{ steps.relInfo.outputs.shortHash }}"
           files: ./build/libs/starlivht-paperclip-${{ steps.relInfo.outputs.version }}-reobf.jar
