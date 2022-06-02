@@ -1,0 +1,24 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Thu, 2 Jun 2022 11:05:32 +0200
+Subject: [PATCH] update dependencies
+
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index b5f4b99c9ff24c0a1e8269a6c6ded54e2d43fd6b..45538cc2e9045e2389f93b6190bb54b739cee2e7 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -29,10 +29,10 @@ dependencies {
+     // Paper end
+     implementation("org.apache.logging.log4j:log4j-iostreams:2.17.1") // Paper
+     implementation("org.apache.logging.log4j:log4j-slf4j18-impl:2.17.1") // Paper
+-    implementation("org.ow2.asm:asm:9.2")
+-    implementation("org.ow2.asm:asm-commons:9.2") // Paper - ASM event executor generation
++    implementation("org.ow2.asm:asm:9.3")
++    implementation("org.ow2.asm:asm-commons:9.3") // Paper - ASM event executor generation
+     runtimeOnly("org.xerial:sqlite-jdbc:3.36.0.3")
+-    runtimeOnly("mysql:mysql-connector-java:8.0.27")
++    runtimeOnly("mysql:mysql-connector-java:8.0.29")
+     runtimeOnly("com.lmax:disruptor:3.4.4") // Paper
+ 
+     runtimeOnly("org.apache.maven:maven-resolver-provider:3.8.4")

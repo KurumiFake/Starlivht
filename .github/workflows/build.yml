@@ -1,0 +1,36 @@
+name: Patch and Build
+on: [ push, pull_request ]
+jobs:
+  build:
+    # Only run on PRs if the source branch is on someone else's repo
+    if: ${{ github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+      - name: Apply Patches
+        run: |
+          git config --global user.email "actions@github.com" && git config --global user.name "Github Actions"
+          ./gradlew applyPatches --stacktrace
+      - name: Build
+        run: ./gradlew createReobfPaperclipJar --stacktrace
+      - name: release info
+        id: relInfo
+        run: |
+          echo "::set-output name=date::$(date +'%H:%M %m/%d/%Y')"
+          echo "::set-output name=shortHash::$(git rev-parse --short HEAD)"
+          echo "::set-output name=version::$(grep version gradle.properties | cut -d "=" -f2 | sed -e 's/^[[:space:]]*//')"
+          echo "::set-output name=mcversion::$(grep mcVersion gradle.properties | cut -d "=" -f2 | sed -e 's/^[[:space:]]*//')"
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        if: github.ref_name == 'ver/1.18.2'
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ github.run_number }}"
+          prerelease: false
+          title: "mpe ${{ steps.relInfo.outputs.mcversion }} ${{ steps.relInfo.outputs.date }} ${{ steps.relInfo.outputs.shortHash }}"
+          files: ./build/libs/mpe-paperclip-${{ steps.relInfo.outputs.version }}-reobf.jar
