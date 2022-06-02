@@ -22,7 +22,7 @@ index 2fa2fbc1a8d0dd249d883068706e843393ecb2db..02a0d9f41c397dbc2e6fefa1d01aca12
 +
  }
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index c53daa7a0701350800ec806e284e873b91ca2f5d..b888ec2d9e8af994188e9d5396547ef682fbd8bb 100644
+index c53daa7a0701350800ec806e284e873b91ca2f5d..80d90b4362429e09cca2ce9da06fdea7ed13bee5 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -227,6 +227,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
@@ -60,7 +60,7 @@ index c53daa7a0701350800ec806e284e873b91ca2f5d..b888ec2d9e8af994188e9d5396547ef6
      @Override
      public void handleKeepAlive(ServerboundKeepAlivePacket packet) {
 +        // Purpur start
-+        if (org.purpurmc.purpur.PurpurConfig.useAlternateKeepAlive) {
++        if (com.shinamc.starlivht.StarlivhtConfig.useAlternateKeepAlive) {
 +            long id = packet.getId();
 +            if (keepAlives.size() > 0 && keepAlives.contains(id)) {
 +                int ping = (int) (Util.getMillis() - id);
