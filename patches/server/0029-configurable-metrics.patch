@@ -19,7 +19,7 @@ index 560e83f1e70cc2712e9c08ffd5e2cab8a6de687b..7eebdc6de80f64d6ddf3446a7f3e7f11
              metricsStarted = true;
          }
 diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-index 8210bf9dc950103360392c964ab893c57a8452d9..c10192d5a05122cbfa9968d2f378bec0530de9ac 100644
+index 8210bf9dc950103360392c964ab893c57a8452d9..e65da4a8f806622615544b18fa98159e3784662c 100644
 --- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 +++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 @@ -169,4 +169,9 @@ public class StarlivhtConfig {
@@ -28,7 +28,7 @@ index 8210bf9dc950103360392c964ab893c57a8452d9..c10192d5a05122cbfa9968d2f378bec0
  
 +    public static boolean metrics = false;
 +    private static void allowServerMetrics() {
-+        serverMetrics = getBoolean("metrics", metrics);
++        metrics = getBoolean("metrics", metrics);
 +    }
 +
  }
