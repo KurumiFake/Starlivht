@@ -8,7 +8,7 @@ Licensed under MIT
 
 diff --git a/src/main/java/carpetfixes/helpers/FastMath.java b/src/main/java/carpetfixes/helpers/FastMath.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..d032ec96bc9f9f90b5dfac749118b56680615760
+index 0000000000000000000000000000000000000000..d3c0ac05354b71886d565452feebc7c1a2d4c316
 --- /dev/null
 +++ b/src/main/java/carpetfixes/helpers/FastMath.java
 @@ -0,0 +1,28 @@
@@ -33,7 +33,7 @@ index 0000000000000000000000000000000000000000..d032ec96bc9f9f90b5dfac749118b566
 +     * ~1.28x faster than {@link Math#round(double)}
 +     */
 +    public static long round(double a) {
-+        if (com.shinamc.startlivht.StarlivhtConfig.riskyMathRoundOpt) {
++        if (com.shinamc.starlivht.StarlivhtConfig.riskyMathRoundOpt) {
 +            return a > 0D ? (long)(a + .5D) : (long)(a - .5D);
 +        } else {
 +            return Math.round(a);
