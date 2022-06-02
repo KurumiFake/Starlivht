@@ -1,0 +1,29 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Thu, 2 Jun 2022 21:03:10 +0200
+Subject: [PATCH] ver command
+
+
+diff --git a/src/main/java/org/bukkit/command/defaults/VersionCommand.java b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
+index 57a21495843f3a144cd73473cdc8781d6129b7ca..3ebe8ca8759aeb2b741c372319f289372652734a 100644
+--- a/src/main/java/org/bukkit/command/defaults/VersionCommand.java
++++ b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
+@@ -48,7 +48,17 @@ public class VersionCommand extends BukkitCommand {
+ 
+     @Override
+     public boolean execute(@NotNull CommandSender sender, @NotNull String currentAlias, @NotNull String[] args) {
+-        if (!testPermission(sender)) return true;
++        // Starlivht start
++        if (!testPermission(sender)) {
++            sender.sendMessage(
++                "§r§l§d--------------------------------------",
++                "§r§f This server is running §9Starlivht",
++                "§r§f Made for §x§f§7§6§8§e§5S§x§f§4§6§c§e§9h§x§f§1§7§1§e§ci§x§e§d§7§5§f§1n§x§e§a§7§a§f§5a§x§e§7§7§e§f§9M§x§e§4§8§3§f§dC",
++                "§r§l§d--------------------------------------"
++            );
++        return true;
++        }
++        // Starlivht end
+ 
+         if (args.length == 0) {
+             //sender.sendMessage("This server is running " + Bukkit.getName() + " version " + Bukkit.getVersion() + " (Implementing API version " + Bukkit.getBukkitVersion() + ")"); // Paper - moved to setVersionMessage
