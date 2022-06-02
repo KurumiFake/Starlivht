@@ -173,10 +173,10 @@ index 0000000000000000000000000000000000000000..2fa2fbc1a8d0dd249d883068706e8433
 +}
 diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtWorldConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtWorldConfig.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..d8a548a15b6a18bd6def356912b2f639f0f216af
+index 0000000000000000000000000000000000000000..c21e5a7e13eba4f5a2ddd957fa0976a572dedcae
 --- /dev/null
 +++ b/src/main/java/com/shinamc/starlivht/StarlivhtWorldConfig.java
-@@ -0,0 +1,91 @@
+@@ -0,0 +1,87 @@
 +package com.shinamc.starlivht;
 +
 +import net.minecraft.core.Registry;
@@ -189,10 +189,6 @@ index 0000000000000000000000000000000000000000..d8a548a15b6a18bd6def356912b2f639
 +import net.minecraft.world.level.block.Block;
 +import net.minecraft.world.level.block.Blocks;
 +import net.minecraft.world.level.block.state.properties.Tilt;
-+import com.shinamc.starlivht.tool.Strippable;
-+import com.shinamc.starlivht.tool.Tillable;
-+import com.shinamc.starlivht.tool.Waxable;
-+import com.shinamc.starlivht.tool.Weatherable;
 +import org.apache.commons.lang.BooleanUtils;
 +import org.bukkit.ChatColor;
 +import org.bukkit.World;
