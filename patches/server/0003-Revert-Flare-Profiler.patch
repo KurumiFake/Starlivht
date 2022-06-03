@@ -18,10 +18,10 @@ index 45538cc2e9045e2389f93b6190bb54b739cee2e7..1a416970d3ece7b33e5f7b1de4bcf546
      testImplementation("io.github.classgraph:classgraph:4.8.47") // Paper - mob goal test
      testImplementation("junit:junit:4.13.2")
 diff --git a/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java b/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
-index 56a5a31b41d00ba73259a7eda5c57d08570d3e6e..a6c9e35303b4b2774016a689f9ce1d4437bae0c3 100644
+index a125abc75ed2bbd905c8fdec442416a45264f531..37241a9e791ae58d02c5b56c24e4cf5ead547d7f 100644
 --- a/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
 +++ b/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
-@@ -12,7 +12,6 @@ import net.minecraft.world.entity.EntityType;
+@@ -15,7 +15,6 @@ import net.minecraft.world.entity.EntityType;
  import java.lang.reflect.Method;
  import java.lang.reflect.Modifier;
  import java.util.List;
@@ -29,7 +29,7 @@ index 56a5a31b41d00ba73259a7eda5c57d08570d3e6e..a6c9e35303b4b2774016a689f9ce1d44
  import net.minecraft.server.MinecraftServer;
  import org.apache.logging.log4j.Level;
  import org.bukkit.configuration.ConfigurationSection;
-@@ -21,13 +20,6 @@ import org.jetbrains.annotations.Nullable;
+@@ -24,13 +23,6 @@ import org.jetbrains.annotations.Nullable;
  import org.simpleyaml.configuration.comments.CommentType;
  import org.simpleyaml.configuration.file.YamlFile;
  import org.simpleyaml.exceptions.InvalidConfigurationException;
@@ -43,7 +43,7 @@ index 56a5a31b41d00ba73259a7eda5c57d08570d3e6e..a6c9e35303b4b2774016a689f9ce1d44
  
  public class PufferfishConfig {
  	
-@@ -259,30 +251,6 @@ public class PufferfishConfig {
+@@ -279,30 +271,6 @@ public class PufferfishConfig {
  				"This can improve performance by a few percent, but has minor gameplay implications.");
  	}
  

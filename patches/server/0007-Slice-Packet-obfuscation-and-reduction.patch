@@ -157,10 +157,10 @@ index d52072ab126f2fdee30bb114f3058338edd72fd5..7530e9c8683b709739e328d5974d25ab
  
          if (this.entity instanceof LivingEntity) {
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 9c88983f1d72de2690af0f7ba0d1f1cc84e14f42..77a2112c46ea9ac3a2bde8a6bcf5cf9cc32c0ddf 100644
+index 4c9023839385cfb43f17d31f4f90ab04641575ce..db002e708f86552ab77206427346179911a5d2b2 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -3014,7 +3014,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -3020,7 +3020,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
              this.entityData.markDirty(Entity.DATA_AIR_SUPPLY_ID);
              return;
          }
