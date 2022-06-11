@@ -6,7 +6,7 @@ Subject: [PATCH] (Dionysus) Use more fastutil data structures
 Use them in more places.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
-index e8a79277f3e57bc82d67ada6543c7f8665311bd3..3583c133cd08a6120a08ec735a28f0bf021da1c7 100644
+index e8a79277f3e57bc82d67ada6543c7f8665311bd3..8192a958fcc840aeaf7e48d1d8203d60ae372596 100644
 --- a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
 @@ -11,10 +11,15 @@ import net.minecraft.network.protocol.handshake.ServerHandshakePacketListener;
@@ -28,6 +28,15 @@ index e8a79277f3e57bc82d67ada6543c7f8665311bd3..3583c133cd08a6120a08ec735a28f0bf
  
  public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketListener {
  
+@@ -24,7 +29,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+     static final java.util.regex.Pattern PROP_PATTERN = java.util.regex.Pattern.compile("\\w{0,16}");
+     // Spigot end
+     // CraftBukkit start - add fields
+-    private static final HashMap<InetAddress, Long> throttleTracker = new HashMap<InetAddress, Long>();
++    private static final Object2LongOpenHashMap<InetAddress> throttleTracker = new Object2LongOpenHashMap<>(); // Starlivht
+     private static int throttleCounter = 0;
+     // CraftBukkit end
+     private static final Component IGNORE_STATUS_REASON = new TextComponent("Ignoring status request");
 @@ -50,7 +55,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
                      InetAddress address = ((java.net.InetSocketAddress) this.connection.getRemoteAddress()).getAddress();
  
@@ -37,19 +46,17 @@ index e8a79277f3e57bc82d67ada6543c7f8665311bd3..3583c133cd08a6120a08ec735a28f0bf
                              ServerHandshakePacketListenerImpl.throttleTracker.put(address, currentTime);
                              Component chatmessage = org.bukkit.craftbukkit.util.CraftChatMessage.fromString(com.destroystokyo.paper.PaperConfig.connectionThrottleKickMessage, true)[0]; // Paper - Configurable connection throttle kick message // Paper - Fix hex colors not working in some kick messages
                              this.connection.send(new ClientboundLoginDisconnectPacket(chatmessage));
-@@ -64,13 +69,14 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+@@ -64,13 +69,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
                              ServerHandshakePacketListenerImpl.throttleCounter = 0;
  
                              // Cleanup stale entries
 -                            java.util.Iterator iter = ServerHandshakePacketListenerImpl.throttleTracker.entrySet().iterator();
-+                            /*java.util.Iterator iter = ServerHandshakePacketListenerImpl.throttleTracker.entrySet().iterator();
-                             while (iter.hasNext()) {
-                                 java.util.Map.Entry<InetAddress, Long> entry = (java.util.Map.Entry) iter.next();
-                                 if (entry.getValue() > connectionThrottle) {
-                                     iter.remove();
-                                 }
+-                            while (iter.hasNext()) {
+-                                java.util.Map.Entry<InetAddress, Long> entry = (java.util.Map.Entry) iter.next();
+-                                if (entry.getValue() > connectionThrottle) {
+-                                    iter.remove();
+-                                }
 -                            }
-+                            }*/
 +                            throttleTracker.object2LongEntrySet().removeIf(entry -> entry.getLongValue() > connectionThrottle); // Dionysus
                          }
                      }
