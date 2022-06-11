@@ -6,29 +6,24 @@ Subject: [PATCH] (Dionysus) Use more fastutil data structures
 Use them in more places.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
-index e8a79277f3e57bc82d67ada6543c7f8665311bd3..8192a958fcc840aeaf7e48d1d8203d60ae372596 100644
+index e8a79277f3e57bc82d67ada6543c7f8665311bd3..19e294c3ef1f1a9cf086660bbaf91e40c30d2a2c 100644
 --- a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
-@@ -11,10 +11,15 @@ import net.minecraft.network.protocol.handshake.ServerHandshakePacketListener;
- import net.minecraft.network.protocol.login.ClientboundLoginDisconnectPacket;
+@@ -12,8 +12,12 @@ import net.minecraft.network.protocol.login.ClientboundLoginDisconnectPacket;
  import net.minecraft.server.MinecraftServer;
  
--// CraftBukkit start
-+// CraftBukkit start // Starlivht start - (Dionysus) Use more fastutil data structures
+ // CraftBukkit start
 +import it.unimi.dsi.fastutil.objects.Object2LongMap;
 +import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 +
  import java.net.InetAddress;
 -import java.util.HashMap;
--// CraftBukkit end
-+//import java.util.HashMap;
 +import java.util.Iterator;
 +import java.util.Map;
-+// Starlivht end // CraftBukkit end
+ // CraftBukkit end
  
  public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketListener {
- 
-@@ -24,7 +29,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+@@ -24,7 +28,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
      static final java.util.regex.Pattern PROP_PATTERN = java.util.regex.Pattern.compile("\\w{0,16}");
      // Spigot end
      // CraftBukkit start - add fields
@@ -37,7 +32,7 @@ index e8a79277f3e57bc82d67ada6543c7f8665311bd3..8192a958fcc840aeaf7e48d1d8203d60
      private static int throttleCounter = 0;
      // CraftBukkit end
      private static final Component IGNORE_STATUS_REASON = new TextComponent("Ignoring status request");
-@@ -50,7 +55,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+@@ -50,7 +54,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
                      InetAddress address = ((java.net.InetSocketAddress) this.connection.getRemoteAddress()).getAddress();
  
                      synchronized (ServerHandshakePacketListenerImpl.throttleTracker) {
@@ -46,7 +41,7 @@ index e8a79277f3e57bc82d67ada6543c7f8665311bd3..8192a958fcc840aeaf7e48d1d8203d60
                              ServerHandshakePacketListenerImpl.throttleTracker.put(address, currentTime);
                              Component chatmessage = org.bukkit.craftbukkit.util.CraftChatMessage.fromString(com.destroystokyo.paper.PaperConfig.connectionThrottleKickMessage, true)[0]; // Paper - Configurable connection throttle kick message // Paper - Fix hex colors not working in some kick messages
                              this.connection.send(new ClientboundLoginDisconnectPacket(chatmessage));
-@@ -64,13 +69,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+@@ -64,13 +68,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
                              ServerHandshakePacketListenerImpl.throttleCounter = 0;
  
                              // Cleanup stale entries
