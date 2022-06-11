@@ -1,0 +1,99 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Sun, 12 Jun 2022 01:50:04 +0200
+Subject: [PATCH] configurable logging of some stuff
+
+- we are behind a proxy
+- teleport commands likes to throw a lot of message
+
+diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
+index 886c6337ca91d342b69a30905347b4eed2b94609..780476a9b1d911a3e3c012333053ffd01fe5b5d0 100644
+--- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
++++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
+@@ -183,4 +183,17 @@ public class StarlivhtConfig {
+         criterionTriggerLocation = getBoolean("criterion-trigger.location", criterionTriggerLocation);
+     }
+ 
++    public static boolean logExtraOfflineMode = true;
++    public static boolean logMovedQuickly = true;
++    public static boolean logMovedWrongly = true;
++    public static boolean logVehicleMovedQuickly = true;
++    public static boolean logVehicleMovedWrongly = true;
++    private static void logs() {
++        logExtraOfflineMode = getBoolean("log.extra-offline-mode-info", logExtraOfflineMode);
++        logMovedQuickly = getBoolean("log.moved-quickly", logMovedQuickly);
++        logMovedWrongly = getBoolean("log.moved-wrongly", logMovedWrongly);
++        logVehicleMovedQuickly = getBoolean("log.vehicle-moved-quickly", logVehicleMovedQuickly);
++        logVehicleMovedWrongly = getBoolean("log.vehicle-moved-wrongly", logVehicleMovedWrongly);
++    }
++
+ }
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index b050ae3335fa8c78c0cac7b7bdfde08ea47f31e6..f2a9984776b2dd3521377f04423fa91ef5785c7a 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -302,16 +302,18 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+ 
+         if (!this.usesAuthentication()) {
+             DedicatedServer.LOGGER.warn("**** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!");
+-            DedicatedServer.LOGGER.warn("The server will make no attempt to authenticate usernames. Beware.");
+-            // Spigot start
+-            if (org.spigotmc.SpigotConfig.bungee) {
+-                DedicatedServer.LOGGER.warn("Whilst this makes it possible to use BungeeCord, unless access to your server is properly restricted, it also opens up the ability for hackers to connect with any username they choose.");
+-                DedicatedServer.LOGGER.warn("Please see http://www.spigotmc.org/wiki/firewall-guide/ for further information.");
+-            } else {
+-                DedicatedServer.LOGGER.warn("While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.");
+-            }
+-            // Spigot end
+-            DedicatedServer.LOGGER.warn("To change this, set \"online-mode\" to \"true\" in the server.properties file.");
++            if (com.shinamc.starlivht.StarlivhtConfig.logExtraOfflineMode) { // Starlivht
++                DedicatedServer.LOGGER.warn("The server will make no attempt to authenticate usernames. Beware.");
++                // Spigot start
++                if (org.spigotmc.SpigotConfig.bungee) {
++                    DedicatedServer.LOGGER.warn("Whilst this makes it possible to use BungeeCord, unless access to your server is properly restricted, it also opens up the ability for hackers to connect with any username they choose.");
++                    DedicatedServer.LOGGER.warn("Please see http://www.spigotmc.org/wiki/firewall-guide/ for further information.");
++                } else {
++                    DedicatedServer.LOGGER.warn("While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.");
++                }
++                // Spigot end
++                DedicatedServer.LOGGER.warn("To change this, set \"online-mode\" to \"true\" in the server.properties file.");
++            } // Starlivht
+         }
+ 
+ 
+diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+index f5e67f9502308e220660cdb23e9acda28d07d8eb..e69b4683b52e33670f580d6f550f633dfc53b9d2 100644
+--- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+@@ -604,6 +604,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+ 
+                 if (d10 - d9 > Math.max(100.0D, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
+                 // CraftBukkit end
++                    if (com.shinamc.starlivht.StarlivhtConfig.logVehicleMovedQuickly) // Starlivht
+                     ServerGamePacketListenerImpl.LOGGER.warn("{} (vehicle of {}) moved too quickly! {},{},{}", new Object[]{entity.getName().getString(), this.player.getName().getString(), d6, d7, d8});
+                     this.connection.send(new ClientboundMoveVehiclePacket(entity));
+                     return;
+@@ -632,6 +633,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+ 
+                 if (d10 > org.spigotmc.SpigotConfig.movedWronglyThreshold) { // Spigot
+                     flag2 = true; // Paper - diff on change, this should be moved wrongly
++                    if (com.shinamc.starlivht.StarlivhtConfig.logVehicleMovedWrongly) // Starlivht
+                     ServerGamePacketListenerImpl.LOGGER.warn("{} (vehicle of {}) moved wrongly! {}", new Object[]{entity.getName().getString(), this.player.getName().getString(), Math.sqrt(d10)});
+                 }
+                 Location curPos = this.getCraftPlayer().getLocation(); // Spigot
+@@ -1397,6 +1399,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+ 
+                                 if (d11 - d10 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
+                                 // CraftBukkit end
++                                    if (com.shinamc.starlivht.StarlivhtConfig.logMovedQuickly) // Starlivht
+                                     ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d7, d8, d9});
+                                     this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
+                                     return;
+@@ -1465,6 +1468,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+ 
+                             if (!this.player.isChangingDimension() && d11 > org.spigotmc.SpigotConfig.movedWronglyThreshold && !this.player.isSleeping() && !this.player.gameMode.isCreative() && this.player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) { // Spigot
+                                 flag2 = true; // Paper - diff on change, this should be moved wrongly
++                                if (com.shinamc.starlivht.StarlivhtConfig.logMovedWrongly) // Starlivht
+                                 ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!", this.player.getName().getString());
+                             }
+ 
