@@ -1,0 +1,22 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: RoccoDev <hey@rocco.dev>
+Date: Mon, 26 Apr 2021 09:50:16 +0200
+Subject: [PATCH] (KigPaper) Kick after receiving invalid creative action
+ packet
+
+Original code by ProjectKig, licensed under GPLv3
+You can find the original code on https://github.com/ProjectKig/KigPaper
+
+diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+index 80d90b4362429e09cca2ce9da06fdea7ed13bee5..f5e67f9502308e220660cdb23e9acda28d07d8eb 100644
+--- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+@@ -3072,6 +3072,8 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+                 this.dropSpamTickCount += 20;
+                 this.player.drop(itemstack, true);
+             }
++        } else {
++            disconnect("Not in creative mode"); // KigPaper
+         }
+ 
+     }

@@ -1,0 +1,56 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: nopjmp <kthompson@hey.com>
+Date: Mon, 20 Dec 2021 19:16:11 -0600
+Subject: [PATCH] (Dionysus) Use more fastutil data structures
+
+Use them in more places.
+
+diff --git a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
+index e8a79277f3e57bc82d67ada6543c7f8665311bd3..3583c133cd08a6120a08ec735a28f0bf021da1c7 100644
+--- a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
+@@ -11,10 +11,15 @@ import net.minecraft.network.protocol.handshake.ServerHandshakePacketListener;
+ import net.minecraft.network.protocol.login.ClientboundLoginDisconnectPacket;
+ import net.minecraft.server.MinecraftServer;
+ 
+-// CraftBukkit start
++// CraftBukkit start // Starlivht start - (Dionysus) Use more fastutil data structures
++import it.unimi.dsi.fastutil.objects.Object2LongMap;
++import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
++
+ import java.net.InetAddress;
+-import java.util.HashMap;
+-// CraftBukkit end
++//import java.util.HashMap;
++import java.util.Iterator;
++import java.util.Map;
++// Starlivht end // CraftBukkit end
+ 
+ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketListener {
+ 
+@@ -50,7 +55,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+                     InetAddress address = ((java.net.InetSocketAddress) this.connection.getRemoteAddress()).getAddress();
+ 
+                     synchronized (ServerHandshakePacketListenerImpl.throttleTracker) {
+-                        if (ServerHandshakePacketListenerImpl.throttleTracker.containsKey(address) && !"127.0.0.1".equals(address.getHostAddress()) && currentTime - ServerHandshakePacketListenerImpl.throttleTracker.get(address) < connectionThrottle) {
++                        if (ServerHandshakePacketListenerImpl.throttleTracker.containsKey(address) && !"127.0.0.1".equals(address.getHostAddress()) && currentTime - ServerHandshakePacketListenerImpl.throttleTracker.getLong(address) < connectionThrottle) {
+                             ServerHandshakePacketListenerImpl.throttleTracker.put(address, currentTime);
+                             Component chatmessage = org.bukkit.craftbukkit.util.CraftChatMessage.fromString(com.destroystokyo.paper.PaperConfig.connectionThrottleKickMessage, true)[0]; // Paper - Configurable connection throttle kick message // Paper - Fix hex colors not working in some kick messages
+                             this.connection.send(new ClientboundLoginDisconnectPacket(chatmessage));
+@@ -64,13 +69,14 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+                             ServerHandshakePacketListenerImpl.throttleCounter = 0;
+ 
+                             // Cleanup stale entries
+-                            java.util.Iterator iter = ServerHandshakePacketListenerImpl.throttleTracker.entrySet().iterator();
++                            /*java.util.Iterator iter = ServerHandshakePacketListenerImpl.throttleTracker.entrySet().iterator();
+                             while (iter.hasNext()) {
+                                 java.util.Map.Entry<InetAddress, Long> entry = (java.util.Map.Entry) iter.next();
+                                 if (entry.getValue() > connectionThrottle) {
+                                     iter.remove();
+                                 }
+-                            }
++                            }*/
++                            throttleTracker.object2LongEntrySet().removeIf(entry -> entry.getLongValue() > connectionThrottle); // Dionysus
+                         }
+                     }
+                     } // Paper - add closing bracket for if check above
