@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Mon, 13 Jun 2022 05:49:17 +0200
+Subject: [PATCH] rebrand to FloTinhHe
+
+
+diff --git a/src/main/java/org/bukkit/command/defaults/VersionCommand.java b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
+index da0c2028c3325b120275d8f15394cf2044e77327..8d8904aa400ab301226aec237f2de6493966fdeb 100644
+--- a/src/main/java/org/bukkit/command/defaults/VersionCommand.java
++++ b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
+@@ -52,7 +52,7 @@ public class VersionCommand extends BukkitCommand {
+         if (!testPermission(sender)) {
+             sender.sendMessage(
+                 "§r§l§d---------------------------------------",
+-                "§r§f This server is running §9Starlivht",
++                "§r§f This server is running §9FloTinhHe",
+                 "§r§f A slightly optimized Pufferfish fork",
+                 "§r§f Made for §x§f§7§6§8§e§5S§x§f§4§6§c§e§9h§x§f§1§7§1§e§ci§x§e§d§7§5§f§1n§x§e§a§7§a§f§5a§x§e§7§7§e§f§9M§x§e§4§8§3§f§dC",
+                 "§r§l§d---------------------------------------"

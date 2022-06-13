@@ -85,11 +85,11 @@ index c3e54da4ab6440811aab2f9dd1e218802ac13285..2a38ea32f2d4a01be556fdf11254d591
          }
      }
 diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-index 02a0d9f41c397dbc2e6fefa1d01aca1250dfdf30..8210bf9dc950103360392c964ab893c57a8452d9 100644
+index 5c003fabc1b578d6d8cf7b7e1c4663da57ff8855..1cadc5b05ebda3e3a37ba2e6dd4d57cc2a847bc5 100644
 --- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 +++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 @@ -164,4 +164,9 @@ public class StarlivhtConfig {
-         useAlternateKeepAlive = getBoolean("settings.use-alternate-keepalive", useAlternateKeepAlive);
+         useAlternateKeepAlive = getBoolean("use-alternate-keepalive", useAlternateKeepAlive);
      }
  
 +    public static boolean riskyMathRoundOpt = false;

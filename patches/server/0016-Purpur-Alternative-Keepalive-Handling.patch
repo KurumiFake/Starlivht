@@ -7,7 +7,7 @@ Original patch from https://github.com/PurpurMC/Purpur
 Licensed under MIT
 
 diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-index 2fa2fbc1a8d0dd249d883068706e843393ecb2db..02a0d9f41c397dbc2e6fefa1d01aca1250dfdf30 100644
+index 2fa2fbc1a8d0dd249d883068706e843393ecb2db..5c003fabc1b578d6d8cf7b7e1c4663da57ff8855 100644
 --- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 +++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 @@ -158,4 +158,10 @@ public class StarlivhtConfig {
@@ -17,7 +17,7 @@ index 2fa2fbc1a8d0dd249d883068706e843393ecb2db..02a0d9f41c397dbc2e6fefa1d01aca12
 +
 +    public static boolean useAlternateKeepAlive = false;
 +    private static void useAlternateKeepAlive() {
-+        useAlternateKeepAlive = getBoolean("settings.use-alternate-keepalive", useAlternateKeepAlive);
++        useAlternateKeepAlive = getBoolean("use-alternate-keepalive", useAlternateKeepAlive);
 +    }
 +
  }

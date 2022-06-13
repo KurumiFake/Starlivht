@@ -5,10 +5,10 @@ Subject: [PATCH] ver command
 
 
 diff --git a/src/main/java/org/bukkit/command/defaults/VersionCommand.java b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
-index 57a21495843f3a144cd73473cdc8781d6129b7ca..802a46ba44cf31f9e41cf684c124cb498b541b7f 100644
+index 57a21495843f3a144cd73473cdc8781d6129b7ca..da0c2028c3325b120275d8f15394cf2044e77327 100644
 --- a/src/main/java/org/bukkit/command/defaults/VersionCommand.java
 +++ b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
-@@ -48,7 +48,20 @@ public class VersionCommand extends BukkitCommand {
+@@ -48,7 +48,18 @@ public class VersionCommand extends BukkitCommand {
  
      @Override
      public boolean execute(@NotNull CommandSender sender, @NotNull String currentAlias, @NotNull String[] args) {
@@ -16,13 +16,11 @@ index 57a21495843f3a144cd73473cdc8781d6129b7ca..802a46ba44cf31f9e41cf684c124cb49
 +        // Starlivht start
 +        if (!testPermission(sender)) {
 +            sender.sendMessage(
-+                "§r§l§d-]--------------------------------------",
-+                "§r§f ] This server is running §9Starlivht",
-+                "§r§f ] A slightly optimized Pufferfish fork",
-+                "§r§f ]",
-+                "§r§f ] Made for §x§f§7§6§8§e§5S§x§f§4§6§c§e§9h§x§f§1§7§1§e§ci§x§e§d§7§5§f§1n§x§e§a§7§a§f§5a§x§e§7§7§e§f§9M§x§e§4§8§3§f§dC",
-+                "§r§f ] by KurumiFake",
-+                "§r§l§d-]--------------------------------------"
++                "§r§l§d---------------------------------------",
++                "§r§f This server is running §9Starlivht",
++                "§r§f A slightly optimized Pufferfish fork",
++                "§r§f Made for §x§f§7§6§8§e§5S§x§f§4§6§c§e§9h§x§f§1§7§1§e§ci§x§e§d§7§5§f§1n§x§e§a§7§a§f§5a§x§e§7§7§e§f§9M§x§e§4§8§3§f§dC",
++                "§r§l§d---------------------------------------"
 +            );
 +            return true;
 +        }
