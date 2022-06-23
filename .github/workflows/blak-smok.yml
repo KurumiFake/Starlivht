@@ -17,7 +17,8 @@ jobs:
         run: |
           git config --global user.email "actions@github.com" && git config --global user.name "Github Actions"
           ./gradlew applyPatches
-          tar -czf src.tar.gz starlivht-*
+      - name: pack
+        run: tar -czf src.tar.gz starlivht-*
       - uses: actions/upload-artifact@v2
         with:
           name: 727
