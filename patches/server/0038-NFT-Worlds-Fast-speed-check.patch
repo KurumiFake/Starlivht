@@ -12,11 +12,11 @@ doing questionable/buggy ones, and claiming breathtaking performance improvement
 any of those Spigot forks!
 
 diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-index 14e30b5d9271a58bcd7776e07d9dfff8ee814616..e3d13ca5e9e8f354c5eae7960f0a87a2bfdbc19d 100644
+index dea8b3aa70cd290ce556ac739fbb0eb1ee0dd6f2..6971b88f6a6fcad71f390cb914a5362a63ca42d4 100644
 --- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 +++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-@@ -191,4 +191,9 @@ public class StarlivhtConfig {
-         logVehicleMovedWrongly = getBoolean("log.vehicle-moved-wrongly", logVehicleMovedWrongly);
+@@ -193,4 +193,9 @@ public class StarlivhtConfig {
+         logExpiredChat = getBoolean("log.expired-chat", logExpiredChat);
      }
  
 +    public static boolean fastSpeedCheck = true;
