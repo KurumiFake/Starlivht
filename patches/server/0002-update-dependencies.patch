@@ -5,29 +5,15 @@ Subject: [PATCH] update dependencies
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index b5f4b99c9ff24c0a1e8269a6c6ded54e2d43fd6b..e9ed9f1ce93d2e64308e09e0707e705dd10a21f9 100644
+index 7d880775c62690e5e098a63134a8a42b27343895..8c442b11b08c56a187ac399dc61dd4cd8709392a 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -29,10 +29,10 @@ dependencies {
-     // Paper end
-     implementation("org.apache.logging.log4j:log4j-iostreams:2.17.1") // Paper
-     implementation("org.apache.logging.log4j:log4j-slf4j18-impl:2.17.1") // Paper
--    implementation("org.ow2.asm:asm:9.2")
--    implementation("org.ow2.asm:asm-commons:9.2") // Paper - ASM event executor generation
-+    implementation("org.ow2.asm:asm:9.3")
-+    implementation("org.ow2.asm:asm-commons:9.3") // Paper - ASM event executor generation
-     runtimeOnly("org.xerial:sqlite-jdbc:3.36.0.3")
--    runtimeOnly("mysql:mysql-connector-java:8.0.27")
-+    runtimeOnly("mysql:mysql-connector-java:8.0.29")
-     runtimeOnly("com.lmax:disruptor:3.4.4") // Paper
- 
-     runtimeOnly("org.apache.maven:maven-resolver-provider:3.8.4")
-@@ -41,7 +41,7 @@ dependencies {
- 
+@@ -36,7 +36,7 @@ dependencies {
+     implementation("commons-lang:commons-lang:2.6")
      implementation("net.fabricmc:mapping-io:0.3.0") // Paper - needed to read mappings for stacktrace deobfuscation
      // Paper start - Use Velocity cipher
 -    implementation("com.velocitypowered:velocity-native:1.1.0-SNAPSHOT") {
-+    implementation("com.velocitypowered:velocity-native:1.1.10-SNAPSHOT") {
++    implementation("com.velocitypowered:velocity-native:3.1.2-SNAPSHOT") {
          isTransitive = false
      }
      // Paper end

@@ -7,10 +7,10 @@ Original code on https://github.com/Electroid/SportPaper
 Licensed under GPLv3
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
-index 7530e9c8683b709739e328d5974d25ab6541f9cf..83466928e96ff46e4d144feecd9947f9a6b110e3 100644
+index 28d92aa661c48ef7bc8e6cf63c26fe53967ebc08..80bc3f5628222fa57349f801b519d7052984a358 100644
 --- a/src/main/java/net/minecraft/server/level/ServerEntity.java
 +++ b/src/main/java/net/minecraft/server/level/ServerEntity.java
-@@ -336,8 +336,10 @@ public class ServerEntity {
+@@ -325,8 +325,10 @@ public class ServerEntity {
          }
  
          // CraftBukkit start - Fix for nonsensical head yaw

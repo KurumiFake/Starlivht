@@ -27,10 +27,10 @@ jobs:
           echo "::set-output name=version::$(grep version gradle.properties | cut -d "=" -f2 | sed -e 's/^[[:space:]]*//')"
           echo "::set-output name=mcversion::$(grep mcVersion gradle.properties | cut -d "=" -f2 | sed -e 's/^[[:space:]]*//')"
       - uses: "marvinpinto/action-automatic-releases@latest"
-        if: github.ref_name == 'ver/1.18.2'
+        if: github.ref_name == 'ver/1.19'
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "1.18.2-${{ github.run_number }}"
+          automatic_release_tag: "1.19-${{ github.run_number }}"
           prerelease: false
           title: "FloTinhHe ${{ steps.relInfo.outputs.mcversion }} ${{ steps.relInfo.outputs.date }} ${{ steps.relInfo.outputs.shortHash }}"
           files: ./build/libs/starlivht-paperclip-${{ steps.relInfo.outputs.version }}-reobf.jar

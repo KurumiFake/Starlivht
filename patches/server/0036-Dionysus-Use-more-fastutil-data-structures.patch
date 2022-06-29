@@ -6,10 +6,10 @@ Subject: [PATCH] (Dionysus) Use more fastutil data structures
 Use them in more places.
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
-index e8a79277f3e57bc82d67ada6543c7f8665311bd3..19e294c3ef1f1a9cf086660bbaf91e40c30d2a2c 100644
+index 08b21f5a7a07f44f8044f56991fb6723cd8f3eea..013658ce9c695bc5c96577d4f07bc4f7c143ee34 100644
 --- a/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerHandshakePacketListenerImpl.java
-@@ -12,8 +12,12 @@ import net.minecraft.network.protocol.login.ClientboundLoginDisconnectPacket;
+@@ -11,8 +11,12 @@ import net.minecraft.network.protocol.login.ClientboundLoginDisconnectPacket;
  import net.minecraft.server.MinecraftServer;
  
  // CraftBukkit start
@@ -23,7 +23,7 @@ index e8a79277f3e57bc82d67ada6543c7f8665311bd3..19e294c3ef1f1a9cf086660bbaf91e40
  // CraftBukkit end
  
  public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketListener {
-@@ -24,7 +28,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+@@ -23,7 +27,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
      static final java.util.regex.Pattern PROP_PATTERN = java.util.regex.Pattern.compile("\\w{0,16}");
      // Spigot end
      // CraftBukkit start - add fields
@@ -31,17 +31,17 @@ index e8a79277f3e57bc82d67ada6543c7f8665311bd3..19e294c3ef1f1a9cf086660bbaf91e40
 +    private static final Object2LongOpenHashMap<InetAddress> throttleTracker = new Object2LongOpenHashMap<>(); // Starlivht
      private static int throttleCounter = 0;
      // CraftBukkit end
-     private static final Component IGNORE_STATUS_REASON = new TextComponent("Ignoring status request");
-@@ -50,7 +54,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+     private static final Component IGNORE_STATUS_REASON = Component.literal("Ignoring status request");
+@@ -49,7 +53,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
                      InetAddress address = ((java.net.InetSocketAddress) this.connection.getRemoteAddress()).getAddress();
  
                      synchronized (ServerHandshakePacketListenerImpl.throttleTracker) {
 -                        if (ServerHandshakePacketListenerImpl.throttleTracker.containsKey(address) && !"127.0.0.1".equals(address.getHostAddress()) && currentTime - ServerHandshakePacketListenerImpl.throttleTracker.get(address) < connectionThrottle) {
 +                        if (ServerHandshakePacketListenerImpl.throttleTracker.containsKey(address) && !"127.0.0.1".equals(address.getHostAddress()) && currentTime - ServerHandshakePacketListenerImpl.throttleTracker.getLong(address) < connectionThrottle) {
                              ServerHandshakePacketListenerImpl.throttleTracker.put(address, currentTime);
-                             Component chatmessage = org.bukkit.craftbukkit.util.CraftChatMessage.fromString(com.destroystokyo.paper.PaperConfig.connectionThrottleKickMessage, true)[0]; // Paper - Configurable connection throttle kick message // Paper - Fix hex colors not working in some kick messages
+                             Component chatmessage = io.papermc.paper.adventure.PaperAdventure.asVanilla(io.papermc.paper.configuration.GlobalConfiguration.get().messages.kick.connectionThrottle); // Paper - Configurable connection throttle kick message
                              this.connection.send(new ClientboundLoginDisconnectPacket(chatmessage));
-@@ -64,13 +68,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
+@@ -63,13 +67,7 @@ public class ServerHandshakePacketListenerImpl implements ServerHandshakePacketL
                              ServerHandshakePacketListenerImpl.throttleCounter = 0;
  
                              // Cleanup stale entries

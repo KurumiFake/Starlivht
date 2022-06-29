@@ -9,10 +9,10 @@ Original code by YatopiaMC, licensed under MIT
 You can find the original code on https://github.com/YatopiaMC/Yatopia
 
 diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-index e65da4a8f806622615544b18fa98159e3784662c..886c6337ca91d342b69a30905347b4eed2b94609 100644
+index cd4d8658a68170b14f87c1c2d5213ddc8de8d48e..7344d11c0789b91c4d96ed8c3679f5df17755f6c 100644
 --- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 +++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-@@ -174,4 +174,13 @@ public class StarlivhtConfig {
+@@ -169,4 +169,13 @@ public class StarlivhtConfig {
          metrics = getBoolean("metrics", metrics);
      }
  
@@ -27,10 +27,10 @@ index e65da4a8f806622615544b18fa98159e3784662c..886c6337ca91d342b69a30905347b4ee
 +
  }
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index a6edf5117d4ae03d8294e7bb74dd2d77048895a5..d5044a1e38febb884c336cba378c2863c589cec8 100644
+index 353463084d90eb684717e65c56da52cd25a1e375..0e6e9d179af7c568871926d35df83b5aba1c02b1 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -606,7 +606,7 @@ public class ServerPlayer extends Player {
+@@ -613,7 +613,7 @@ public class ServerPlayer extends Player {
  
      @Override
      protected void onInsideBlock(BlockState state) {
@@ -39,7 +39,7 @@ index a6edf5117d4ae03d8294e7bb74dd2d77048895a5..d5044a1e38febb884c336cba378c2863
      }
  
      @Override
-@@ -652,7 +652,7 @@ public class ServerPlayer extends Player {
+@@ -659,7 +659,7 @@ public class ServerPlayer extends Player {
              }
          }
  
@@ -48,7 +48,7 @@ index a6edf5117d4ae03d8294e7bb74dd2d77048895a5..d5044a1e38febb884c336cba378c2863
          if (this.levitationStartPos != null) {
              CriteriaTriggers.LEVITATION.trigger(this, this.levitationStartPos, this.tickCount - this.levitationStartTime);
          }
-@@ -728,9 +728,7 @@ public class ServerPlayer extends Player {
+@@ -735,9 +735,7 @@ public class ServerPlayer extends Player {
                  this.connection.send(new ClientboundSetExperiencePacket(this.experienceProgress, this.totalExperience, this.experienceLevel));
              }
  

@@ -7,10 +7,10 @@ Original patch from https://github.com/etil2jz/Mirai
 Licensed under GPLv3
 
 diff --git a/src/main/java/net/minecraft/server/ServerFunctionManager.java b/src/main/java/net/minecraft/server/ServerFunctionManager.java
-index 48205eb72c63fc22042ba4eef8bd1cf85ef61f8a..5dcf62cf4d7f59217048614e066229ac92c5b1d7 100644
+index 00a50196f6a4768d84acfbbeec79a0753308f091..1a958686290e2ab0b03aa6189fef13f25fb13f5f 100644
 --- a/src/main/java/net/minecraft/server/ServerFunctionManager.java
 +++ b/src/main/java/net/minecraft/server/ServerFunctionManager.java
-@@ -48,13 +48,14 @@ public class ServerFunctionManager {
+@@ -46,13 +46,14 @@ public class ServerFunctionManager {
      }
  
      public void tick() {
@@ -18,7 +18,7 @@ index 48205eb72c63fc22042ba4eef8bd1cf85ef61f8a..5dcf62cf4d7f59217048614e066229ac
 +        //this.executeTagFunctions(this.ticking, ServerFunctionManager.TICK_FUNCTION_TAG); // Mirai - moved down
          if (this.postReload) {
              this.postReload = false;
-             Collection<CommandFunction> collection = this.library.getTag(ServerFunctionManager.LOAD_FUNCTION_TAG).getValues();
+             Collection<CommandFunction> collection = this.library.getTag(ServerFunctionManager.LOAD_FUNCTION_TAG);
  
              this.executeTagFunctions(collection, ServerFunctionManager.LOAD_FUNCTION_TAG);
          }

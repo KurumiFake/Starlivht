@@ -7,7 +7,7 @@ Original patch from https://github.com/PurpurMC/Purpur
 Licensed under MIT
 
 diff --git a/src/main/java/io/papermc/paper/console/HexFormattingConverter.java b/src/main/java/io/papermc/paper/console/HexFormattingConverter.java
-index ea83ee8762c126c449993a7497257b0bd8663452..ecd3da582fe9f77f39f920029f5121c6d8099525 100644
+index b4d0b7ecd56ab952319946854168c1299cb0b1be..8054b8da82ca455d23b26a53cc568160b14e04ce 100644
 --- a/src/main/java/io/papermc/paper/console/HexFormattingConverter.java
 +++ b/src/main/java/io/papermc/paper/console/HexFormattingConverter.java
 @@ -38,6 +38,7 @@ public final class HexFormattingConverter extends LogEventPatternConverter {

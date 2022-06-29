@@ -6,13 +6,13 @@ Subject: [PATCH] (PaperPR) Optimize VarInts
 https://github.com/PaperMC/Paper/pull/6957
 
 diff --git a/src/main/java/net/minecraft/network/FriendlyByteBuf.java b/src/main/java/net/minecraft/network/FriendlyByteBuf.java
-index 896a4237f871d46cf39b0721e909c2cc3b5fc728..e2a0a7fd5afd8cd3467dab049695956c381fb3cd 100644
+index 35377576ed182814051c11f902e02e8e921e84e3..f6714abe0c8ef7a794ff497daf9760891410f175 100644
 --- a/src/main/java/net/minecraft/network/FriendlyByteBuf.java
 +++ b/src/main/java/net/minecraft/network/FriendlyByteBuf.java
-@@ -65,19 +65,22 @@ public class FriendlyByteBuf extends ByteBuf {
-     public java.util.Locale adventure$locale; // Paper
-     public static final short MAX_STRING_LENGTH = 32767;
-     public static final int MAX_COMPONENT_STRING_LENGTH = 262144;
+@@ -82,19 +82,22 @@ public class FriendlyByteBuf extends ByteBuf {
+     private static final int PUBLIC_KEY_SIZE = 256;
+     private static final int MAX_PUBLIC_KEY_HEADER_SIZE = 256;
+     private static final int MAX_PUBLIC_KEY_LENGTH = 512;
 +    // Paper start - Optimize VarInts
 +    private static final int[] VARINT_EXACT_BYTE_LENGTHS = new int[33];
 +    static {
@@ -39,7 +39,7 @@ index 896a4237f871d46cf39b0721e909c2cc3b5fc728..e2a0a7fd5afd8cd3467dab049695956c
      }
  
      public static int getVarLongSize(long value) {
-@@ -420,7 +423,23 @@ public class FriendlyByteBuf extends ByteBuf {
+@@ -503,7 +506,23 @@ public class FriendlyByteBuf extends ByteBuf {
          return new UUID(this.readLong(), this.readLong());
      }
  

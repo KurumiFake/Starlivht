@@ -7,10 +7,10 @@ Original code by RedeObscurity, licensed under MIT
 You can find the original code on https://github.com/RedeObscurity/Obscurity
 
 diff --git a/src/main/java/net/minecraft/advancements/Advancement.java b/src/main/java/net/minecraft/advancements/Advancement.java
-index c534055f90b98942b9d7d152fd502cf5387c995b..d48d1a998f48d05cb9aca51ec41a43190b253dbc 100644
+index 2c01231dcfbb992c9d2f034fcfd4af52fe8ac265..1972122d0f7679edd6077d9a8d5dc63eb51589d9 100644
 --- a/src/main/java/net/minecraft/advancements/Advancement.java
 +++ b/src/main/java/net/minecraft/advancements/Advancement.java
-@@ -46,7 +46,7 @@ public class Advancement {
+@@ -45,7 +45,7 @@ public class Advancement {
      public Advancement(ResourceLocation id, @Nullable Advancement parent, @Nullable DisplayInfo display, AdvancementRewards rewards, Map<String, Criterion> criteria, String[][] requirements) {
          this.id = id;
          this.display = display;

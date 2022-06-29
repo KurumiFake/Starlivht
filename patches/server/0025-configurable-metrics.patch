@@ -1,0 +1,33 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Thu, 2 Jun 2022 19:16:20 +0200
+Subject: [PATCH] configurable metrics
+
+slightly modified ver of Mirai's
+
+diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
+index 93b2e4c867be1756d1a5c0fcad71a7ba9f804d37..cd4d8658a68170b14f87c1c2d5213ddc8de8d48e 100644
+--- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
++++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
+@@ -164,4 +164,9 @@ public class StarlivhtConfig {
+         riskyMathRoundOpt = getBoolean("use-risky-mathround-opt", riskyMathRoundOpt);
+     }
+ 
++    public static boolean metrics = false;
++    private static void allowServerMetrics() {
++        metrics = getBoolean("metrics", metrics);
++    }
++
+ }
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index b58a7769fe5968c0b166f2469a5c38d392497fa9..44ced718203f57ae2c28ef96fb31e65c1b973ddf 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -222,6 +222,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         org.spigotmc.WatchdogThread.doStart(org.spigotmc.SpigotConfig.timeoutTime, org.spigotmc.SpigotConfig.restartOnCrash);
+         thread.start(); // Paper - start console thread after MinecraftServer.console & PaperConfig are initialized
+         io.papermc.paper.command.PaperCommands.registerCommands(this);
++        if (com.shinamc.starlivht.StarlivhtConfig) // Starlivht - configurable metrics
+         com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics();
+         com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // load version history now
+         io.papermc.paper.brigadier.PaperBrigadierProviderImpl.INSTANCE.getClass(); // init PaperBrigadierProvider

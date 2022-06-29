@@ -12,10 +12,10 @@ doing questionable/buggy ones, and claiming breathtaking performance improvement
 any of those Spigot forks!
 
 diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-index 780476a9b1d911a3e3c012333053ffd01fe5b5d0..bdd38dbf3dfc82e712ff62daa8192a76ae3d280e 100644
+index 14e30b5d9271a58bcd7776e07d9dfff8ee814616..e3d13ca5e9e8f354c5eae7960f0a87a2bfdbc19d 100644
 --- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 +++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-@@ -196,4 +196,9 @@ public class StarlivhtConfig {
+@@ -191,4 +191,9 @@ public class StarlivhtConfig {
          logVehicleMovedWrongly = getBoolean("log.vehicle-moved-wrongly", logVehicleMovedWrongly);
      }
  
@@ -26,10 +26,10 @@ index 780476a9b1d911a3e3c012333053ffd01fe5b5d0..bdd38dbf3dfc82e712ff62daa8192a76
 +
  }
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 248d59c2c8d6534287668701a84331322f3b2e1f..7d08c7141c901f681fc57bf45147aaba94e51faf 100644
+index 170973c923a77c519af31e2e44e6e0d231f18636..cc5c3a09e6f26c689c84b42e338a5a9a691e46bf 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -1131,7 +1131,16 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -1195,7 +1195,16 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
                  }
  
                  this.tryCheckInsideBlocks();

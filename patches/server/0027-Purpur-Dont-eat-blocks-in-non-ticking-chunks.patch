@@ -7,10 +7,10 @@ Original patch from https://github.com/PurpurMC/Purpur
 Licensed under MIT
 
 diff --git a/src/main/java/net/minecraft/server/level/ChunkMap.java b/src/main/java/net/minecraft/server/level/ChunkMap.java
-index 0ab662448c24ba1d3c697f8096f03c88dd622e77..f69ed1e35d141909a2f1117233a22f289602a0ec 100644
+index e134963fa97ea886c7cf4af8ab0ba53b6010fe41..1b731114520a1607b5c42774d86d9ed51f21da3f 100644
 --- a/src/main/java/net/minecraft/server/level/ChunkMap.java
 +++ b/src/main/java/net/minecraft/server/level/ChunkMap.java
-@@ -1778,7 +1778,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
+@@ -1826,7 +1826,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
          return this.anyPlayerCloseEnoughForSpawning(this.getUpdatingChunkIfPresent(chunkcoordintpair.toLong()), chunkcoordintpair, reducedRange);
      }
  
@@ -20,10 +20,10 @@ index 0ab662448c24ba1d3c697f8096f03c88dd622e77..f69ed1e35d141909a2f1117233a22f28
          // tested and confirmed via System.nanoTime()
          com.destroystokyo.paper.util.misc.PooledLinkedHashSets.PooledObjectLinkedOpenHashSet<ServerPlayer> playersInRange = reducedRange ? playerchunk.playersInMobSpawnRange : playerchunk.playersInChunkTickRange;
 diff --git a/src/main/java/net/minecraft/world/entity/ai/goal/EatBlockGoal.java b/src/main/java/net/minecraft/world/entity/ai/goal/EatBlockGoal.java
-index 99044ebe2c37ce951566e3463ddbfaeec46d2b3c..17cf979d88980746abe17fd3baf76fd106c18823 100644
+index 80aa539f7c6a6ee44338de084cdcdf5fb4ef996a..9c2c2b3557f4a70c6c965f159a57682e1827d1ad 100644
 --- a/src/main/java/net/minecraft/world/entity/ai/goal/EatBlockGoal.java
 +++ b/src/main/java/net/minecraft/world/entity/ai/goal/EatBlockGoal.java
-@@ -32,6 +32,12 @@ public class EatBlockGoal extends Goal {
+@@ -31,6 +31,12 @@ public class EatBlockGoal extends Goal {
  
      @Override
      public boolean canUse() {

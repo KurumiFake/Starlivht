@@ -6,10 +6,10 @@ Subject: [PATCH] Revert "Flare Profiler"
 This reverts commit 54c4c3c09abca991b82e19410d4058ed62ec1626.
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 45538cc2e9045e2389f93b6190bb54b739cee2e7..1a416970d3ece7b33e5f7b1de4bcf546aa0b07f5 100644
+index 8c442b11b08c56a187ac399dc61dd4cd8709392a..ee153a869bfa51d5a0b68a1af2352cd4fd5d8ebb 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -52,7 +52,6 @@ dependencies {
+@@ -54,7 +54,6 @@ dependencies {
          exclude(group="org.yaml", module="snakeyaml")
      }
      // Pufferfish end
@@ -831,7 +831,7 @@ index 0d9e2b3728f9ab500bd5e44702718535d338e9a5..909b2c98e7a9117d2f737245e4661792
  
      @Override
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java b/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
-index f1be8a98c49a63d09c838a85eb58041733f71776..d752720f2f234b9dbd2117333fee1bfad663ec02 100644
+index e3845dc3357bbb74885ae3a1a08525adde581235..e948ec5a573b22645664eb53bc3e9932246544e4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/ServerShutdownThread.java
 @@ -11,7 +11,6 @@ public class ServerShutdownThread extends Thread {

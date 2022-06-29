@@ -5,7 +5,7 @@ Subject: [PATCH] rebrand
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index b04e9ab317fbce9c090b61076eb07c40f069dc59..b5f4b99c9ff24c0a1e8269a6c6ded54e2d43fd6b 100644
+index a4a146d9c3e07bdf941d81147ca31daf4689a687..7d880775c62690e5e098a63134a8a42b27343895 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -9,7 +9,7 @@ plugins {
@@ -15,9 +15,9 @@ index b04e9ab317fbce9c090b61076eb07c40f069dc59..b5f4b99c9ff24c0a1e8269a6c6ded54e
 -    implementation(project(":pufferfish-api")) // Pufferfish // Paper
 +    implementation(project(":starlivht-api")) // Starlivht // Pufferfish // Paper
      // Pufferfish start
-     implementation("io.papermc.paper:paper-mojangapi:1.18.2-R0.1-SNAPSHOT") {
+     implementation("io.papermc.paper:paper-mojangapi:1.19-R0.1-SNAPSHOT") {
          exclude("io.papermc.paper", "paper-api")
-@@ -80,7 +80,7 @@ tasks.jar {
+@@ -84,7 +84,7 @@ tasks.jar {
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
@@ -27,7 +27,7 @@ index b04e9ab317fbce9c090b61076eb07c40f069dc59..b5f4b99c9ff24c0a1e8269a6c6ded54e
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index f2fe6ea3719ff8b2913b7a3a939d7a5b75cb8b28..c8bc55e2de2a4f44d0328b543ae15765ed2fce64 100644
+index 061716934ba0a1f01e4d85d664034f72b3c7a765..c20a8f9abca87a347447358a7f311b7e3915f1a1 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
 @@ -593,7 +593,7 @@ public class Metrics {
@@ -49,17 +49,17 @@ index f2fe6ea3719ff8b2913b7a3a939d7a5b75cb8b28..c8bc55e2de2a4f44d0328b543ae15765
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
 diff --git a/src/main/java/gg/pufferfish/pufferfish/PufferfishVersionFetcher.java b/src/main/java/gg/pufferfish/pufferfish/PufferfishVersionFetcher.java
-index adafc4fd661cf080b004b86c3eaed231a0133101..69c5adb82d32632dafdd9915c3a5edde5328187a 100644
+index e877921370f6009a4bd204d9b17d2d58834b8822..63aaaafdf56288c87d57178f275d00933209833d 100644
 --- a/src/main/java/gg/pufferfish/pufferfish/PufferfishVersionFetcher.java
 +++ b/src/main/java/gg/pufferfish/pufferfish/PufferfishVersionFetcher.java
 @@ -30,8 +30,8 @@ public class PufferfishVersionFetcher implements VersionFetcher {
  	private static final Logger LOGGER = Logger.getLogger("PufferfishVersionFetcher");
  	private static final HttpClient client = HttpClient.newHttpClient();
  	
--	private static final URI JENKINS_URI = URI.create("https://ci.pufferfish.host/job/Pufferfish-1.18/lastSuccessfulBuild/buildNumber");
--	private static final String GITHUB_FORMAT = "https://api.github.com/repos/pufferfish-gg/Pufferfish/compare/ver/1.18...%s";
-+	//private static final URI JENKINS_URI = URI.create("https://ci.pufferfish.host/job/Pufferfish-1.18/lastSuccessfulBuild/buildNumber");
-+	private static final String GITHUB_FORMAT = "https://api.github.com/repos/KurumiFake/Starlivht/compare/ver/1.18.2...%s";
+-	private static final URI JENKINS_URI = URI.create("https://ci.pufferfish.host/job/Pufferfish-1.19/lastSuccessfulBuild/buildNumber");
+-	private static final String GITHUB_FORMAT = "https://api.github.com/repos/pufferfish-gg/Pufferfish/compare/ver/1.19...%s";
++	//private static final URI JENKINS_URI = URI.create("https://ci.pufferfish.host/job/Pufferfish-1.19/lastSuccessfulBuild/buildNumber");
++	private static final String GITHUB_FORMAT = "https://api.github.com/repos/KurumiFake/Starlivht/compare/ver/1.19...%s";
  	
  	private static final HttpResponse.BodyHandler<JsonObject> JSON_OBJECT_BODY_HANDLER = responseInfo -> HttpResponse.BodySubscribers
  			.mapping(
@@ -104,10 +104,10 @@ index adafc4fd661cf080b004b86c3eaed231a0133101..69c5adb82d32632dafdd9915c3a5edde
 \ No newline at end of file
 +}
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 371b0f95b23d67c9913875a3dd7888e722551f18..be1098cf32c2b08e49cec860523d207d8167dcf1 100644
+index e96ff8b13b1237d7c70359b78e4d72938877191f..dfba200143d4866374aa999c80819208a8c3a95a 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1695,7 +1695,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1656,7 +1656,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -117,10 +117,10 @@ index 371b0f95b23d67c9913875a3dd7888e722551f18..be1098cf32c2b08e49cec860523d207d
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index ce1ca033b351785fb67304b8933990d7f2f22d29..057a715d1abe93d5ffaef305378c15d781bbca07 100644
+index 33218552405c526955d30031469d3044c724dde3..c2ba52df325e7c6b3f97342195fc4d7aa7fb5e97 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -249,7 +249,7 @@ import javax.annotation.Nullable; // Paper
+@@ -245,7 +245,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {

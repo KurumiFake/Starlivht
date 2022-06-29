@@ -5,10 +5,10 @@ Subject: [PATCH] rebrand to FloTinhHe
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 205ae8461ba57a501a6ff8301d9d6052816e7eaf..6c81e0f55d90eb3a841caf8ede42cc76361917ec 100644
+index ee153a869bfa51d5a0b68a1af2352cd4fd5d8ebb..e8ef49bf163323fd3df88283995b85e15fda08dd 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -79,7 +79,7 @@ tasks.jar {
+@@ -83,7 +83,7 @@ tasks.jar {
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
@@ -18,10 +18,10 @@ index 205ae8461ba57a501a6ff8301d9d6052816e7eaf..6c81e0f55d90eb3a841caf8ede42cc76
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 9f131dbe3518cb64631678eef5f3b551bd0a8402..4b19eda59367f61e6fcccbbef3eb728593714f2f 100644
+index c0ea4f4c68ef8649842077a3d900452fd5417321..2be9cc2f62a0c9c7662559fb1c3a8649e9729c6a 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1695,7 +1695,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1656,7 +1656,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -31,10 +31,10 @@ index 9f131dbe3518cb64631678eef5f3b551bd0a8402..4b19eda59367f61e6fcccbbef3eb7285
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 3e24ce4d91634d1f8d75ccc01040a48eaf5f8402..58575b205200b3c1ef84cb53a34c600db73654fb 100644
+index 6465ff5b7afe77d6a8b27c1caf4471ae37b4430e..1a855731f43e18b4234d6fda82e637513ef14af7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -249,7 +249,7 @@ import javax.annotation.Nullable; // Paper
+@@ -245,7 +245,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
