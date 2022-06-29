@@ -5,10 +5,10 @@ Subject: [PATCH] ver command
 
 
 diff --git a/src/main/java/org/bukkit/command/defaults/VersionCommand.java b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
-index 57a21495843f3a144cd73473cdc8781d6129b7ca..da0c2028c3325b120275d8f15394cf2044e77327 100644
+index e40f017f87d6b6b4770501b106c76dc69ec69abb..e762f0f938a87e96995166ac3bf13cb7b20b7c43 100644
 --- a/src/main/java/org/bukkit/command/defaults/VersionCommand.java
 +++ b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
-@@ -48,7 +48,18 @@ public class VersionCommand extends BukkitCommand {
+@@ -47,7 +47,18 @@ public class VersionCommand extends BukkitCommand {
  
      @Override
      public boolean execute(@NotNull CommandSender sender, @NotNull String currentAlias, @NotNull String[] args) {

@@ -5,10 +5,10 @@ Subject: [PATCH] rebrand to FloTinhHe
 
 
 diff --git a/src/main/java/org/bukkit/command/defaults/VersionCommand.java b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
-index da0c2028c3325b120275d8f15394cf2044e77327..8d8904aa400ab301226aec237f2de6493966fdeb 100644
+index e762f0f938a87e96995166ac3bf13cb7b20b7c43..7ff9901c4d538dbc65302ef37af2b269400121c7 100644
 --- a/src/main/java/org/bukkit/command/defaults/VersionCommand.java
 +++ b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
-@@ -52,7 +52,7 @@ public class VersionCommand extends BukkitCommand {
+@@ -51,7 +51,7 @@ public class VersionCommand extends BukkitCommand {
          if (!testPermission(sender)) {
              sender.sendMessage(
                  "§r§l§d---------------------------------------",
