@@ -6,7 +6,7 @@ Subject: [PATCH] Revert "Flare Profiler"
 This reverts commit 54c4c3c09abca991b82e19410d4058ed62ec1626.
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 8c442b11b08c56a187ac399dc61dd4cd8709392a..ee153a869bfa51d5a0b68a1af2352cd4fd5d8ebb 100644
+index 0c804718530d59392724af1435d5a2ff695e1356..8a9bbb9fef70f725dcec9143cb92ab3b77f2177e 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -54,7 +54,6 @@ dependencies {
@@ -76,7 +76,7 @@ index a125abc75ed2bbd905c8fdec442416a45264f531..37241a9e791ae58d02c5b56c24e4cf5e
      private static void miscSettings() {
 diff --git a/src/main/java/gg/pufferfish/pufferfish/compat/ServerConfigurations.java b/src/main/java/gg/pufferfish/pufferfish/compat/ServerConfigurations.java
 deleted file mode 100644
-index f0ec1f3944c00d38537f6f3b3f13236b22562458..0000000000000000000000000000000000000000
+index 4ad189d52b27560424ddb311d0817a334637dc95..0000000000000000000000000000000000000000
 --- a/src/main/java/gg/pufferfish/pufferfish/compat/ServerConfigurations.java
 +++ /dev/null
 @@ -1,78 +0,0 @@
@@ -105,7 +105,7 @@ index f0ec1f3944c00d38537f6f3b3f13236b22562458..00000000000000000000000000000000
 -      "server.properties",
 -      "bukkit.yml",
 -      "spigot.yml",
--      "paper.yml",
+-      // "paper.yml", // TODO: Figure out what to do with this.
 -      "pufferfish.yml"
 -    };
 -
