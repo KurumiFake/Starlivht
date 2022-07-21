@@ -40,25 +40,6 @@ index 0000000000000000000000000000000000000000..d3c0ac05354b71886d565452feebc7c1
 +        }
 +    }
 +}
-diff --git a/src/main/java/com/destroystokyo/paper/PaperCommand.java b/src/main/java/com/destroystokyo/paper/PaperCommand.java
-index 8ec20f17a3f8c39ae3ebf3fb630f98b35283ba88..e3b219dcadf51f86b61e391398571d8079a7dad1 100644
---- a/src/main/java/com/destroystokyo/paper/PaperCommand.java
-+++ b/src/main/java/com/destroystokyo/paper/PaperCommand.java
-@@ -734,12 +734,12 @@ public class PaperCommand extends Command {
-                     ++relitChunks[0];
-                     sender.getBukkitEntity().sendMessage(text().color(DARK_AQUA).append(
-                         text("Relit chunk ", BLUE), text(chunkPos.toString()),
--                        text(", progress: ", BLUE), text((int)(Math.round(100.0 * (double)(relitChunks[0])/(double)pending[0])) + "%")
-+                        text(", progress: ", BLUE), text((int)(carpetfixes.helpers.FastMath.round(100.0 * (double)(relitChunks[0])/(double)pending[0])) + "%")
-                     ));
-                 },
-                 (int totalRelit) -> {
-                     final long end = System.nanoTime();
--                    final long diff = Math.round(1.0e-6*(end - start));
-+                    final long diff = carpetfixes.helpers.FastMath.round(1.0e-6*(end - start));
-                     sender.getBukkitEntity().sendMessage(text().color(DARK_AQUA).append(
-                         text("Relit ", BLUE), text(totalRelit),
-                         text(" chunks. Took ", BLUE), text(diff + "ms")
 diff --git a/src/main/java/com/destroystokyo/paper/gui/RAMDetails.java b/src/main/java/com/destroystokyo/paper/gui/RAMDetails.java
 index fa56cd09102a89692b42f1d14257990508c5c720..5c6b5e9c882f29f743ff037e2b8df89b93bae225 100644
 --- a/src/main/java/com/destroystokyo/paper/gui/RAMDetails.java
@@ -99,11 +80,30 @@ index 2fa2fbc1a8d0dd249d883068706e843393ecb2db..93b2e4c867be1756d1a5c0fcad71a7ba
 +    }
 +
  }
+diff --git a/src/main/java/io/papermc/paper/command/subcommands/FixLightCommand.java b/src/main/java/io/papermc/paper/command/subcommands/FixLightCommand.java
+index 68645bbbab9b4225048b647252d8f462028a9c84..725f532ce4479cf059b3f749eb01372179056581 100644
+--- a/src/main/java/io/papermc/paper/command/subcommands/FixLightCommand.java
++++ b/src/main/java/io/papermc/paper/command/subcommands/FixLightCommand.java
+@@ -105,12 +105,12 @@ public final class FixLightCommand implements PaperSubcommand {
+                 ++relitChunks[0];
+                 sender.getBukkitEntity().sendMessage(text().color(DARK_AQUA).append(
+                     text("Relit chunk ", BLUE), text(chunkPos.toString()),
+-                    text(", progress: ", BLUE), text((int) (Math.round(100.0 * (double) (relitChunks[0]) / (double) pending[0])) + "%")
++                    text(", progress: ", BLUE), text((int) (carpetfixes.helpers.FastMath.round(100.0 * (double) (relitChunks[0]) / (double) pending[0])) + "%")
+                 ));
+             },
+             (int totalRelit) -> {
+                 final long end = System.nanoTime();
+-                final long diff = Math.round(1.0e-6 * (end - start));
++                final long diff = carpetfixes.helpers.FastMath.round(1.0e-6 * (end - start));
+                 sender.getBukkitEntity().sendMessage(text().color(DARK_AQUA).append(
+                     text("Relit ", BLUE), text(totalRelit),
+                     text(" chunks. Took ", BLUE), text(diff + "ms")
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index dfba200143d4866374aa999c80819208a8c3a95a..c0ea4f4c68ef8649842077a3d900452fd5417321 100644
+index cb171061537101eba930d512444cb48a30df2f0c..03c6a0cb4a568b468b884a3f6f9a75a27dd6ed9c 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -2733,7 +2733,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2728,7 +2728,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                      }
  
                      double overuseCount = (double)overuse/(double)MAX_CHUNK_EXEC_TIME;

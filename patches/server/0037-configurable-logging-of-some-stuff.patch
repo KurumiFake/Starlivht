@@ -32,7 +32,7 @@ index 7344d11c0789b91c4d96ed8c3679f5df17755f6c..dea8b3aa70cd290ce556ac739fbb0eb1
 +
  }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 5d50c3da5990539a5d1bd5b62180f780aef55b4b..6e1412e28733a2ba8870f31c019af1583fc2d14b 100644
+index f20d87c76492073d07ab5800c35a6bfec69177e6..a06b1b4bcc116a0c2cd1eb74760088590f608f27 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -293,16 +293,18 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -65,7 +65,7 @@ index 5d50c3da5990539a5d1bd5b62180f780aef55b4b..6e1412e28733a2ba8870f31c019af158
  
  
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 05cd95494b3c368eb4d13d7335c662485fd27904..5d5777bdeeaa88836560225656ea1a0fa66c6b57 100644
+index add0f6ceabdc1c6a63d0d0ea4081f1bfcef85a92..864dae4ebddf26d57427c6c21b5a5fee31410c6e 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -615,6 +615,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
@@ -105,6 +105,6 @@ index 05cd95494b3c368eb4d13d7335c662485fd27904..5d5777bdeeaa88836560225656ea1a0f
          } else {
              if (this.isChatExpired(instant)) {
 +                if (com.shinamc.starlivht.StarlivhtConfig.logExpiredChat) // Starlivht
-                 ServerGamePacketListenerImpl.LOGGER.warn("{} sent expired chat: '{}'. Is the client/server system time unsynchronized?", this.player.getName().getString(), s);
+                 ServerGamePacketListenerImpl.LOGGER.warn("{} sent expired chat: '{}'. Is the client/server system time unsynchronized? c: {} s: {}", this.player.getName().getString(), s, instant.getEpochSecond(), Instant.now().getEpochSecond()); // Paper
              }
  

@@ -18,7 +18,7 @@ index 0c804718530d59392724af1435d5a2ff695e1356..8a9bbb9fef70f725dcec9143cb92ab3b
      testImplementation("io.github.classgraph:classgraph:4.8.47") // Paper - mob goal test
      testImplementation("junit:junit:4.13.2")
 diff --git a/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java b/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
-index a125abc75ed2bbd905c8fdec442416a45264f531..37241a9e791ae58d02c5b56c24e4cf5ead547d7f 100644
+index 09827eaa9f6adf49385a33aa60b3a6bf4005a982..c3cf5dfde63468b7146902f43350f384288fcce5 100644
 --- a/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
 +++ b/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
 @@ -15,7 +15,6 @@ import net.minecraft.world.entity.EntityType;
@@ -43,7 +43,7 @@ index a125abc75ed2bbd905c8fdec442416a45264f531..37241a9e791ae58d02c5b56c24e4cf5e
  
  public class PufferfishConfig {
  	
-@@ -279,30 +271,6 @@ public class PufferfishConfig {
+@@ -301,30 +293,6 @@ public class PufferfishConfig {
  				"This can improve performance by a few percent, but has minor gameplay implications.");
  	}
  

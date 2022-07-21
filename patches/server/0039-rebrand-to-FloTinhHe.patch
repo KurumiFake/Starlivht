@@ -5,7 +5,7 @@ Subject: [PATCH] rebrand to FloTinhHe
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index ee153a869bfa51d5a0b68a1af2352cd4fd5d8ebb..e8ef49bf163323fd3df88283995b85e15fda08dd 100644
+index 8a9bbb9fef70f725dcec9143cb92ab3b77f2177e..0b80713ded613c7c10fab925e982b9daaee5699c 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -83,7 +83,7 @@ tasks.jar {
@@ -18,7 +18,7 @@ index ee153a869bfa51d5a0b68a1af2352cd4fd5d8ebb..e8ef49bf163323fd3df88283995b85e1
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index c0ea4f4c68ef8649842077a3d900452fd5417321..2be9cc2f62a0c9c7662559fb1c3a8649e9729c6a 100644
+index 03c6a0cb4a568b468b884a3f6f9a75a27dd6ed9c..50ca0b1ebb71a6620e57c7c66a9007c2d03961a3 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -1656,7 +1656,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -31,10 +31,10 @@ index c0ea4f4c68ef8649842077a3d900452fd5417321..2be9cc2f62a0c9c7662559fb1c3a8649
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 6465ff5b7afe77d6a8b27c1caf4471ae37b4430e..1a855731f43e18b4234d6fda82e637513ef14af7 100644
+index b9cd8108250592381498ddd8a7d6f3d42a0ee3af..11ed0160f8095f9089f097ac377eba477a5bbb25 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -245,7 +245,7 @@ import javax.annotation.Nullable; // Paper
+@@ -246,7 +246,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {

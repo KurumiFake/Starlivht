@@ -5,10 +5,10 @@ Subject: [PATCH] Starlivht config file
 
 
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index e756edf56995f4552387c2e1082307eb3dd48bb3..7b60ab7b244fc8a3a43e57cbc9d8e70941a004ed 100644
+index 56e261efa654e4a6872ccea28f0461df13845d13..304a1532b6f1e15ab4c3731fd34851eabbbbc1f0 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
-@@ -1922,6 +1922,18 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
+@@ -1937,6 +1937,18 @@ public interface Server extends PluginMessageRecipient, net.kyori.adventure.audi
          }
          // Paper end
  

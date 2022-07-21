@@ -7,10 +7,10 @@ Original patch from https://github.com/PurpurMC/Purpur
 Licensed under MIT
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index ffb04b8eb20eb304ea2467710ba1d1c5579f59fd..170973c923a77c519af31e2e44e6e0d231f18636 100644
+index 4ee43b1acb4c86e7479e9b80682c0092baf9d3ed..3d0e8b2785b57b98ab7dd4809f5166c9dc56f814 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -1874,6 +1874,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -1875,6 +1875,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
          this.yRotO = this.getYRot();
          this.xRotO = this.getXRot();
          this.setYHeadRot(yaw); // Paper - Update head rotation
