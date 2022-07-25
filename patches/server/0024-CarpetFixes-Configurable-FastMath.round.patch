@@ -100,10 +100,10 @@ index 68645bbbab9b4225048b647252d8f462028a9c84..725f532ce4479cf059b3f749eb013721
                      text("Relit ", BLUE), text(totalRelit),
                      text(" chunks. Took ", BLUE), text(diff + "ms")
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index cb171061537101eba930d512444cb48a30df2f0c..03c6a0cb4a568b468b884a3f6f9a75a27dd6ed9c 100644
+index a859faafd43a84cd83ee683423501a2f25171fa2..f6bb57fb012b8174f3acdd6a14621f877b48f22d 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -2728,7 +2728,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2739,7 +2739,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                      }
  
                      double overuseCount = (double)overuse/(double)MAX_CHUNK_EXEC_TIME;

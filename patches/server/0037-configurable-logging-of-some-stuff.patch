@@ -65,7 +65,7 @@ index f20d87c76492073d07ab5800c35a6bfec69177e6..a06b1b4bcc116a0c2cd1eb7476008859
  
  
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index add0f6ceabdc1c6a63d0d0ea4081f1bfcef85a92..864dae4ebddf26d57427c6c21b5a5fee31410c6e 100644
+index 5dda453d1a9238bb907e958a3d70fba39fbfd71d..b755a4887881394c4b4bad424dcb4a47cde921bf 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -615,6 +615,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
@@ -100,7 +100,7 @@ index add0f6ceabdc1c6a63d0d0ea4081f1bfcef85a92..864dae4ebddf26d57427c6c21b5a5fee
                                  ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!", this.player.getName().getString());
                              }
  
-@@ -2167,6 +2171,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -2173,6 +2177,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
              return false;
          } else {
              if (this.isChatExpired(instant)) {

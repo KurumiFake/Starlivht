@@ -7,10 +7,10 @@ Original code on https://gitlab.com/Titaniumtown/JettPack
 Patch licensed under GPLv3
 
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index d22ab8c958d975f6fad85cb16fefba73a7d6808e..63cddf50c69f59c690b733fbee51decad0f04f54 100644
+index 36ca0f508da1933f98bca937c059e4c3ac74a09f..044fc580b296d21cc45418075fe8244be5943bf8 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-@@ -652,6 +652,14 @@ public final class SimplePluginManager implements PluginManager {
+@@ -653,6 +653,14 @@ public final class SimplePluginManager implements PluginManager {
       */
      @Override
      public void callEvent(@NotNull Event event) {
@@ -25,7 +25,7 @@ index d22ab8c958d975f6fad85cb16fefba73a7d6808e..63cddf50c69f59c690b733fbee51deca
          // Paper - replace callEvent by merging to below method
          // KTP start - optimize spigot event bus
          final var isAsync = event.isAsynchronous();
-@@ -665,8 +673,8 @@ public final class SimplePluginManager implements PluginManager {
+@@ -666,8 +674,8 @@ public final class SimplePluginManager implements PluginManager {
          }
          // KTP end - optimize spigot event bus
  
