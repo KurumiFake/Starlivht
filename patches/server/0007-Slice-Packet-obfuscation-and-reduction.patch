@@ -132,31 +132,33 @@ index 1d88edfd09a909044f6e3175af652914b4d06311..e4f8403c6544e1a00571f28954458a14
      }
  }
 diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
-index 88152988425b7b02ec5ce229ba4c24b40e030329..2e0e1232a621124b76bae72d97053b7817950b51 100644
+index 88152988425b7b02ec5ce229ba4c24b40e030329..9118e51ae57b983774e209631618e39748f9fc60 100644
 --- a/src/main/java/net/minecraft/server/level/ServerEntity.java
 +++ b/src/main/java/net/minecraft/server/level/ServerEntity.java
-@@ -367,8 +367,19 @@ public class ServerEntity {
+@@ -367,7 +367,22 @@ public class ServerEntity {
  
          if (datawatcher.isDirty()) {
              ((ServerLevel) this.entity.level).chunkSource.chunkMap.runOnTrackerMainThread(() -> // Pufferfish
 -            this.broadcastAndSend(new ClientboundSetEntityDataPacket(this.entity.getId(), datawatcher, false))
--            ); // Pufferfish
++            // Starlivht start - attempt to make this work with Petal's async stuffs
++            {
 +            // Slice start
-+            ClientboundSetEntityDataPacket dataPacket = new ClientboundSetEntityDataPacket(this.entity.getId(), datawatcher, false)); // Pufferfish
-+            if (this.entity instanceof ServerPlayer serverPlayer) {
-+                serverPlayer.connection.send(dataPacket);
-+            }
++                ClientboundSetEntityDataPacket dataPacket = new ClientboundSetEntityDataPacket(this.entity.getId(), datawatcher, false)); // Pufferfish
++                if (this.entity instanceof ServerPlayer serverPlayer) {
++                    serverPlayer.connection.send(dataPacket);
++                }
 +
-+            //Get the packedData that the original packet has, and then determine if any of those are changed in
-+            //the foreign version. If null, nothing to notify foreign trackers about.
-+            List<SynchedEntityData.DataItem<?>> dirtyItems = datawatcher.packForeignDirty(dataPacket.getUnpackedData());
-+            if (dirtyItems != null) {
-+                this.broadcast(new ClientboundSetEntityDataPacket(this.entity.getId(), dirtyItems));
-+            }
-+            // Slice end
++                //Get the packedData that the original packet has, and then determine if any of those are changed in
++                //the foreign version. If null, nothing to notify foreign trackers about.
++                List<SynchedEntityData.DataItem<?>> dirtyItems = datawatcher.packForeignDirty(dataPacket.getUnpackedData());
++                if (dirtyItems != null) {
++                    this.broadcast(new ClientboundSetEntityDataPacket(this.entity.getId(), dirtyItems));
++                }
++                // Slice end
++            } // Starlivht end
+             ); // Pufferfish
          }
  
-         if (this.entity instanceof LivingEntity) {
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
 index 06716bcd7afb84596b90b1c869cfe2c03e538d5a..69824d0968d298729639085b25eacd5cca0f9f97 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
