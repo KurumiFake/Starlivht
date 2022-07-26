@@ -132,7 +132,7 @@ index 1d88edfd09a909044f6e3175af652914b4d06311..e4f8403c6544e1a00571f28954458a14
      }
  }
 diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
-index 88152988425b7b02ec5ce229ba4c24b40e030329..9118e51ae57b983774e209631618e39748f9fc60 100644
+index 88152988425b7b02ec5ce229ba4c24b40e030329..e373b86df5194d2dcecc5b97695ede4af642f9d0 100644
 --- a/src/main/java/net/minecraft/server/level/ServerEntity.java
 +++ b/src/main/java/net/minecraft/server/level/ServerEntity.java
 @@ -367,7 +367,22 @@ public class ServerEntity {
@@ -142,8 +142,8 @@ index 88152988425b7b02ec5ce229ba4c24b40e030329..9118e51ae57b983774e209631618e397
 -            this.broadcastAndSend(new ClientboundSetEntityDataPacket(this.entity.getId(), datawatcher, false))
 +            // Starlivht start - attempt to make this work with Petal's async stuffs
 +            {
-+            // Slice start
-+                ClientboundSetEntityDataPacket dataPacket = new ClientboundSetEntityDataPacket(this.entity.getId(), datawatcher, false)); // Pufferfish
++                // Slice start
++                ClientboundSetEntityDataPacket dataPacket = new ClientboundSetEntityDataPacket(this.entity.getId(), datawatcher, false);
 +                if (this.entity instanceof ServerPlayer serverPlayer) {
 +                    serverPlayer.connection.send(dataPacket);
 +                }
