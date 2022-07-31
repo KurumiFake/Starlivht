@@ -32,7 +32,7 @@ index 7344d11c0789b91c4d96ed8c3679f5df17755f6c..dea8b3aa70cd290ce556ac739fbb0eb1
 +
  }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index f20d87c76492073d07ab5800c35a6bfec69177e6..a06b1b4bcc116a0c2cd1eb74760088590f608f27 100644
+index 429bff1362fde706759f00702d7a9ecc738a687d..4b2b1506eb20da848947f07fb3026e62e4f1cd2a 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -293,16 +293,18 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -65,10 +65,10 @@ index f20d87c76492073d07ab5800c35a6bfec69177e6..a06b1b4bcc116a0c2cd1eb7476008859
  
  
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 5dda453d1a9238bb907e958a3d70fba39fbfd71d..b755a4887881394c4b4bad424dcb4a47cde921bf 100644
+index 5a6e05543ec3c8925a7d98b4e05272d1e26a9aac..86608fa6ca381dbe725edd960ec849e0ff66b8ed 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -615,6 +615,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -659,6 +659,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
                  if (d10 - d9 > Math.max(100.0D, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
                  // CraftBukkit end
@@ -76,7 +76,7 @@ index 5dda453d1a9238bb907e958a3d70fba39fbfd71d..b755a4887881394c4b4bad424dcb4a47
                      ServerGamePacketListenerImpl.LOGGER.warn("{} (vehicle of {}) moved too quickly! {},{},{}", new Object[]{entity.getName().getString(), this.player.getName().getString(), d6, d7, d8});
                      this.connection.send(new ClientboundMoveVehiclePacket(entity));
                      return;
-@@ -643,6 +644,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -687,6 +688,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
                  if (d10 > org.spigotmc.SpigotConfig.movedWronglyThreshold) { // Spigot
                      flag2 = true; // Paper - diff on change, this should be moved wrongly
@@ -84,7 +84,7 @@ index 5dda453d1a9238bb907e958a3d70fba39fbfd71d..b755a4887881394c4b4bad424dcb4a47
                      ServerGamePacketListenerImpl.LOGGER.warn("{} (vehicle of {}) moved wrongly! {}", new Object[]{entity.getName().getString(), this.player.getName().getString(), Math.sqrt(d10)});
                  }
                  Location curPos = this.getCraftPlayer().getLocation(); // Spigot
-@@ -1411,6 +1413,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -1479,6 +1481,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
                                  if (d11 - d10 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
                                  // CraftBukkit end
@@ -92,7 +92,7 @@ index 5dda453d1a9238bb907e958a3d70fba39fbfd71d..b755a4887881394c4b4bad424dcb4a47
                                      ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d7, d8, d9});
                                      this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                      return;
-@@ -1479,6 +1482,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -1547,6 +1550,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
                              if (!this.player.isChangingDimension() && d11 > org.spigotmc.SpigotConfig.movedWronglyThreshold && !this.player.isSleeping() && !this.player.gameMode.isCreative() && this.player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) { // Spigot
                                  flag2 = true; // Paper - diff on change, this should be moved wrongly
@@ -100,11 +100,11 @@ index 5dda453d1a9238bb907e958a3d70fba39fbfd71d..b755a4887881394c4b4bad424dcb4a47
                                  ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!", this.player.getName().getString());
                              }
  
-@@ -2173,6 +2177,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -2560,6 +2564,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
              return false;
          } else {
-             if (this.isChatExpired(instant)) {
+             if (message.hasExpiredServer(Instant.now())) {
 +                if (com.shinamc.starlivht.StarlivhtConfig.logExpiredChat) // Starlivht
-                 ServerGamePacketListenerImpl.LOGGER.warn("{} sent expired chat: '{}'. Is the client/server system time unsynchronized? c: {} s: {}", this.player.getName().getString(), s, instant.getEpochSecond(), Instant.now().getEpochSecond()); // Paper
+                 ServerGamePacketListenerImpl.LOGGER.warn("{} sent expired chat: '{}'. Is the client/server system time unsynchronized? c: {} s: {}", this.player.getName().getString(), message.signedContent().plain(), message.timeStamp().getEpochSecond(), Instant.now().getEpochSecond()); // Paper
              }
  
