@@ -25,10 +25,10 @@ index 3e17f6131bf590d7c4a16b79c1c145cb4f565bc9..e1233fa58d068448d0accef7a7f6725f
          this.id = buf.readVarInt();
          this.packedItems = SynchedEntityData.unpack(buf);
 diff --git a/src/main/java/net/minecraft/network/syncher/SynchedEntityData.java b/src/main/java/net/minecraft/network/syncher/SynchedEntityData.java
-index 1d88edfd09a909044f6e3175af652914b4d06311..e4f8403c6544e1a00571f28954458a1412a6de58 100644
+index 1c4e812c8b3f85ac5d69b637eb43d4b9751ad150..f647b2fc50a91467f68b1e5f2143d09668b0713c 100644
 --- a/src/main/java/net/minecraft/network/syncher/SynchedEntityData.java
 +++ b/src/main/java/net/minecraft/network/syncher/SynchedEntityData.java
-@@ -136,6 +136,11 @@ public class SynchedEntityData {
+@@ -137,6 +137,11 @@ public class SynchedEntityData {
      }
  
      public <T> void set(EntityDataAccessor<T> key, T value) {
@@ -40,7 +40,7 @@ index 1d88edfd09a909044f6e3175af652914b4d06311..e4f8403c6544e1a00571f28954458a14
          SynchedEntityData.DataItem<T> datawatcher_item = this.getItem(key);
  
          if (ObjectUtils.notEqual(value, datawatcher_item.getValue())) {
-@@ -145,6 +150,11 @@ public class SynchedEntityData {
+@@ -146,6 +151,11 @@ public class SynchedEntityData {
              this.isDirty = true;
          }
  
@@ -52,7 +52,7 @@ index 1d88edfd09a909044f6e3175af652914b4d06311..e4f8403c6544e1a00571f28954458a14
      }
  
      // CraftBukkit start - add method from above
-@@ -200,6 +210,28 @@ public class SynchedEntityData {
+@@ -201,6 +211,28 @@ public class SynchedEntityData {
          return list;
      }
  
@@ -81,7 +81,7 @@ index 1d88edfd09a909044f6e3175af652914b4d06311..e4f8403c6544e1a00571f28954458a14
      @Nullable
      public List<SynchedEntityData.DataItem<?>> getAll() {
          List<SynchedEntityData.DataItem<?>> list = null;
-@@ -313,11 +345,14 @@ public class SynchedEntityData {
+@@ -314,11 +346,14 @@ public class SynchedEntityData {
          final EntityDataAccessor<T> accessor;
          T value;
          private boolean dirty;
@@ -96,7 +96,7 @@ index 1d88edfd09a909044f6e3175af652914b4d06311..e4f8403c6544e1a00571f28954458a14
          }
  
          public EntityDataAccessor<T> getAccessor() {
-@@ -343,5 +378,34 @@ public class SynchedEntityData {
+@@ -344,5 +379,34 @@ public class SynchedEntityData {
          public SynchedEntityData.DataItem<T> copy() {
              return new SynchedEntityData.DataItem<>(this.accessor, this.accessor.getSerializer().copy(this.value));
          }
@@ -160,10 +160,10 @@ index 88152988425b7b02ec5ce229ba4c24b40e030329..e373b86df5194d2dcecc5b97695ede4a
          }
  
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 06716bcd7afb84596b90b1c869cfe2c03e538d5a..69824d0968d298729639085b25eacd5cca0f9f97 100644
+index f0a672bb1ee762b983082e276f44d0dab8eec73e..2ac287167ac455d207a12e91ae95bc4d79215b79 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -3122,7 +3122,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -3119,7 +3119,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
              this.entityData.markDirty(Entity.DATA_AIR_SUPPLY_ID);
              return;
          }
@@ -173,10 +173,10 @@ index 06716bcd7afb84596b90b1c869cfe2c03e538d5a..69824d0968d298729639085b25eacd5c
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index cd9cbfa5ef94994b3f7f2ecdde843620e7e6c071..b22e4068407f3012b62683abd060509829e61c62 100644
+index 9b131f0a827413e9f5d6d0f7491c5481576cb8b1..0652ecb958a19edc2898837cf4396cc3b83a800c 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
-@@ -640,7 +640,7 @@ public abstract class Player extends LivingEntity {
+@@ -641,7 +641,7 @@ public abstract class Player extends LivingEntity {
      public void increaseScore(int score) {
          int j = this.getScore();
  
@@ -186,10 +186,10 @@ index cd9cbfa5ef94994b3f7f2ecdde843620e7e6c071..b22e4068407f3012b62683abd0605098
  
      public void startAutoSpinAttack(int riptideTicks) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index d7ba155d9485128f4c7ad8ab4a2b7302a86aeb67..e3c39891ff408d87cb955808a91c8ffbe3085be1 100644
+index 9f34358dfcb95104c5bb9e63fbe295e6e049a55d..a3550d935fedc817fb4214fa020de5aa8dbb4e52 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-@@ -2279,7 +2279,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -2291,7 +2291,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
                  this.sendHealthUpdate();
              }
          }

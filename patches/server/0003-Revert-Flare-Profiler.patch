@@ -18,7 +18,7 @@ index 0c804718530d59392724af1435d5a2ff695e1356..8a9bbb9fef70f725dcec9143cb92ab3b
      testImplementation("io.github.classgraph:classgraph:4.8.47") // Paper - mob goal test
      testImplementation("junit:junit:4.13.2")
 diff --git a/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java b/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
-index 09827eaa9f6adf49385a33aa60b3a6bf4005a982..c3cf5dfde63468b7146902f43350f384288fcce5 100644
+index 38cb29c646ff496ffaa6553f98a565b71155c464..c9b5af16589817f036424c35ca4887109b5a7d50 100644
 --- a/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
 +++ b/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
 @@ -15,7 +15,6 @@ import net.minecraft.world.entity.EntityType;
@@ -73,7 +73,7 @@ index 09827eaa9f6adf49385a33aa60b3a6bf4005a982..c3cf5dfde63468b7146902f43350f384
 -
  
      public static boolean disableMethodProfiler;
-     private static void miscSettings() {
+ 	public static boolean disableOutOfOrderChat;
 diff --git a/src/main/java/gg/pufferfish/pufferfish/compat/ServerConfigurations.java b/src/main/java/gg/pufferfish/pufferfish/compat/ServerConfigurations.java
 deleted file mode 100644
 index 4ad189d52b27560424ddb311d0817a334637dc95..0000000000000000000000000000000000000000

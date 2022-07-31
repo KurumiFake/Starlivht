@@ -8,10 +8,10 @@ Original code from https://github.com/Cryptite/Slice
 Patch licensed under MIT
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 8a9b6cacfb87d4ba825f3386894c25631ecbb1f7..18c17a195897b209db545e0661c193ed4b02afc1 100644
+index 8a0e566aa0124480481b17b5b31691849c3ee7cd..34011db12578d914062dc7e4560fa1d9fa4842ff 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -3084,7 +3084,7 @@ public abstract class LivingEntity extends Entity {
+@@ -3087,7 +3087,7 @@ public abstract class LivingEntity extends Entity {
  
              ItemStack itemstack1 = this.getItemBySlot(enumitemslot);
  
