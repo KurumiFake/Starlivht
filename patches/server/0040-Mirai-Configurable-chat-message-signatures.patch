@@ -7,16 +7,16 @@ Original patch from https://github.com/etil2jz/Mirai
 Licensed under GPLv3
 
 diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
-index 6971b88f6a6fcad71f390cb914a5362a63ca42d4..1fd20b249013b7c9f32a9d3c9e84aa6618ae8d53 100644
+index 6971b88f6a6fcad71f390cb914a5362a63ca42d4..64b900ece063cb1ece64d787e814f4cda1828a46 100644
 --- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 +++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
 @@ -198,4 +198,9 @@ public class StarlivhtConfig {
          fastSpeedCheck = getBoolean("fast-speed-check", fastSpeedCheck);
      }
  
-+    public static boolean chatMessageSignatures = true;
++    public static boolean chatMessageSignatures = false;
 +    private static void chatreport() {
-+        chatMessageSignatures = getBoolean("disable-chat-reports", chatMessageSignatures);
++        chatMessageSignatures = getBoolean("chat-message-signatures", chatMessageSignatures);
 +    }
 +
  }
