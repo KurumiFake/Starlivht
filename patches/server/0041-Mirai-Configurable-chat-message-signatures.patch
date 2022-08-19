@@ -1,0 +1,109 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Arthur Blanchot <blanchot.arthur@protonmail.ch>
+Date: Tue, 2 Aug 2022 14:48:12 +0200
+Subject: [PATCH] (Mirai) Configurable chat message signatures
+
+Original patch from https://github.com/etil2jz/Mirai
+Licensed under GPLv3
+
+diff --git a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
+index 6971b88f6a6fcad71f390cb914a5362a63ca42d4..a6537df13d0c053c716de814e21571d5871528f1 100644
+--- a/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
++++ b/src/main/java/com/shinamc/starlivht/StarlivhtConfig.java
+@@ -198,4 +198,9 @@ public class StarlivhtConfig {
+         fastSpeedCheck = getBoolean("fast-speed-check", fastSpeedCheck);
+     }
+ 
++    public static boolean chatMessageSignatures;
++    private static void chatreport() {
++        chatMessageSignatures = getBoolean("disable-chat-reports", false);
++    }
++
+ }
+diff --git a/src/main/java/net/minecraft/network/protocol/status/ServerStatus.java b/src/main/java/net/minecraft/network/protocol/status/ServerStatus.java
+index 11183b4a39b9897e1b1067eb2a3556d2b1d90f52..5ee07d715ab6bfeaa3b9c4689e15081f56407bbe 100644
+--- a/src/main/java/net/minecraft/network/protocol/status/ServerStatus.java
++++ b/src/main/java/net/minecraft/network/protocol/status/ServerStatus.java
+@@ -78,6 +78,7 @@ public class ServerStatus {
+     }
+ 
+     public boolean enforcesSecureChat() {
++        if (com.shinamc.starlivht.StarlivhtConfig.chatMessageSignatures) return true; // Mirai - configurable chat message signatures
+         return this.enforcesSecureChat;
+     }
+ 
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index a14c8bf7a7f3eb4cb6ea894df8e4e881617332f8..5f2e30aa7bbbdae6b3efb38d93267b10cd359b81 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -629,6 +629,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+ 
+     @Override
+     public boolean enforceSecureProfile() {
++        if (com.shinamc.starlivht.StarlivhtConfig.chatMessageSignatures) return false; // Mirai - configurable chat message signatures
+         return this.getProperties().enforceSecureProfile && this.getProperties().onlineMode;
+     }
+ 
+diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+index ad49fe7ec224d6c93091dcc4dc7e93c5e350881e..d6de23f444c9e2a2b844c67e8264eeaeb1f02bbf 100644
+--- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+@@ -2154,10 +2154,34 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+ 
+     @Override
+     public void send(Packet<?> packet) {
++        // Mirai start - configurable chat message signatures
++        if (com.shinamc.starlivht.StarlivhtConfig.chatMessageSignatures) {
++            if (packet instanceof net.minecraft.network.protocol.game.ClientboundPlayerChatHeaderPacket) {
++                return;
++            } else if (packet instanceof net.minecraft.network.protocol.game.ClientboundPlayerChatPacket chat) {
++                packet = new ClientboundSystemChatPacket(chat.chatType().resolve(this.player.level.registryAccess())
++                        .get().decorate(chat.message().serverContent()), false);
++
++
++                this.send(packet);
++                return;
++			}
++		}
++        // Mirai end
+         this.send(packet, (PacketSendListener) null);
+     }
+ 
+     public void send(Packet<?> packet, @Nullable PacketSendListener callbacks) {
++        // Mirai start - configurable chat message signatures
++        if (com.shinamc.starlivht.StarlivhtConfig.chatMessageSignatures) {
++            if (packet instanceof net.minecraft.network.protocol.game.ClientboundPlayerChatHeaderPacket) {
++                return;
++            } else if (packet instanceof net.minecraft.network.protocol.game.ClientboundPlayerChatPacket chat && callbacks != null) {
++                this.send(chat);
++                return;
++            }
++        }
++        // Mirai end
+         // CraftBukkit start
+         if (packet == null || this.processedDisconnect) { // Spigot
+             return;
+diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
+index a4ad55ca0aa57053fc2ee229199707025dc7f520..a709d2fd3d81adb7e6763ee7a13c453b5a0ff193 100644
+--- a/src/main/java/net/minecraft/server/players/PlayerList.java
++++ b/src/main/java/net/minecraft/server/players/PlayerList.java
+@@ -1471,6 +1471,7 @@ public abstract class PlayerList {
+     }
+ 
+     public boolean verifyChatTrusted(PlayerChatMessage message, ChatSender profile) { // Paper - private -> public
++        if (com.shinamc.starlivht.StarlivhtConfig.chatMessageSignatures) return true; // Mirai - configurable chat message signatures
+         return !message.hasExpiredServer(Instant.now()) && message.verify(profile);
+     }
+ 
+diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
+index 10a7a1cab1a8f2c5c286ee591af4bf1594dfafd6..a681043e20e8fa2163da396b1cc7b5a917912f16 100644
+--- a/src/main/java/net/minecraft/world/entity/player/Player.java
++++ b/src/main/java/net/minecraft/world/entity/player/Player.java
+@@ -1516,6 +1516,7 @@ public abstract class Player extends LivingEntity {
+ 
+     @Nullable
+     public ProfilePublicKey getProfilePublicKey() {
++        if (com.shinamc.starlivht.StarlivhtConfig.chatMessageSignatures) return null; // Mirai - configurable chat message signatures
+         return this.profilePublicKey;
+     }
+ 
