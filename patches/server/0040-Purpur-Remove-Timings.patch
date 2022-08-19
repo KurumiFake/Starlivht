@@ -84,10 +84,10 @@ index 8bc0cb9ad5bb4e76d962ff54305e2c08e279a17b..e8efbbeece7e866c6c4d7489677d2d9e
                      PacketUtils.LOGGER.debug("Ignoring packet due to disconnection: {}", packet);
                  }
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 7e796881f170b75027978957370986a7eac4e7e7..e3f27024ff63ab6593d786160263b0710b952d1c 100644
+index 9ee57bca5f561a40e66d8837138fa6b2cdb91d81..2559349d7c0e146964e88c62c523928de84c740a 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1401,15 +1401,15 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1402,15 +1402,15 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      public void onServerExit() {}
  
      public void tickServer(BooleanSupplier shouldKeepTicking) {
@@ -106,7 +106,7 @@ index 7e796881f170b75027978957370986a7eac4e7e7..e3f27024ff63ab6593d786160263b071
          // Paper end
          new com.destroystokyo.paper.event.server.ServerTickStartEvent(this.tickCount+1).callEvent(); // Paper
  
-@@ -1461,9 +1461,9 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1462,9 +1462,9 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          // Paper end
          io.papermc.paper.util.CachedLists.reset(); // Paper
          // Paper start - move executeAll() into full server tick timing
@@ -118,7 +118,7 @@ index 7e796881f170b75027978957370986a7eac4e7e7..e3f27024ff63ab6593d786160263b071
          // Paper end
          // Paper start
          long endTime = System.nanoTime();
-@@ -1485,29 +1485,29 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1486,29 +1486,29 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          this.frameTimer.logFrameDuration(i1 - i);
          this.profiler.pop();
          org.spigotmc.WatchdogThread.tick(); // Spigot
@@ -156,7 +156,7 @@ index 7e796881f170b75027978957370986a7eac4e7e7..e3f27024ff63ab6593d786160263b071
          // Send time updates to everyone, it will get the right time from the world the player is in.
          // Paper start - optimize time updates
          for (final ServerLevel world : this.getAllLevels()) {
-@@ -1527,7 +1527,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1528,7 +1528,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              }
          }
          // Paper end
@@ -165,7 +165,7 @@ index 7e796881f170b75027978957370986a7eac4e7e7..e3f27024ff63ab6593d786160263b071
  
          this.isIteratingOverLevels = true; // Paper
          while (iterator.hasNext()) {
-@@ -1550,14 +1550,14 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1551,14 +1551,14 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              this.profiler.push("tick");
  
              try {
@@ -182,7 +182,7 @@ index 7e796881f170b75027978957370986a7eac4e7e7..e3f27024ff63ab6593d786160263b071
              } catch (Throwable throwable) {
                  // Spigot Start
                  CrashReport crashreport;
-@@ -1580,24 +1580,24 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1581,24 +1581,24 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          this.isIteratingOverLevels = false; // Paper
  
          this.profiler.popPush("connection");
@@ -213,7 +213,7 @@ index 7e796881f170b75027978957370986a7eac4e7e7..e3f27024ff63ab6593d786160263b071
  
          this.profiler.pop();
      }
-@@ -2748,7 +2748,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2737,7 +2737,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              return;
          }
  
@@ -222,7 +222,7 @@ index 7e796881f170b75027978957370986a7eac4e7e7..e3f27024ff63ab6593d786160263b071
          try {
              for (;;) {
                  boolean moreTasks = this.tickMidTickTasks();
-@@ -2775,7 +2775,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2764,7 +2764,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  }
              }
          } finally {
@@ -750,10 +750,10 @@ index f58873ef4362bfcc618ead099be94ba2dd4d86ed..345d53ee7a12f5a4f0ae13e959ae9d2d
                  this.entityManager.saveAll();
              } else {
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 86608fa6ca381dbe725edd960ec849e0ff66b8ed..fa9fc8adca0fcc1455eae910b56a79f61418fc04 100644
+index 2426dedeab7586331760037df072bad860b8e724..ad49fe7ec224d6c93091dcc4dc7e93c5e350881e 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -2490,7 +2490,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -2526,7 +2526,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
              }
          }
          // Paper End
@@ -762,7 +762,7 @@ index 86608fa6ca381dbe725edd960ec849e0ff66b8ed..fa9fc8adca0fcc1455eae910b56a79f6
          if ( org.spigotmc.SpigotConfig.logCommands ) // Spigot
          this.LOGGER.info(this.player.getScoreboardName() + " issued server command: " + s);
  
-@@ -2500,7 +2500,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -2536,7 +2536,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
          this.cserver.getPluginManager().callEvent(event);
  
          if (event.isCancelled()) {
@@ -771,7 +771,7 @@ index 86608fa6ca381dbe725edd960ec849e0ff66b8ed..fa9fc8adca0fcc1455eae910b56a79f6
              return;
          }
  
-@@ -2513,7 +2513,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -2549,7 +2549,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
              java.util.logging.Logger.getLogger(ServerGamePacketListenerImpl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
              return;
          } finally {
@@ -781,7 +781,7 @@ index 86608fa6ca381dbe725edd960ec849e0ff66b8ed..fa9fc8adca0fcc1455eae910b56a79f6
      }
      // CraftBukkit end
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 44a5b8ca913cb092b241ed04644ad208a9999de8..59b89d63f90848bf0db188f4c612e9089f3452ae 100644
+index f6f3ae656adff1c9522fcedf45b543e2b990520a..a4ad55ca0aa57053fc2ee229199707025dc7f520 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -1240,7 +1240,7 @@ public abstract class PlayerList {
@@ -868,7 +868,7 @@ index 210b0cdd4831421c8f43c3d823ac8e962b56bbbc..de99946f5215ff2c78d6df5b8b7d5b6a
                  chunkcoordintpair.x, chunkcoordintpair.z, data, null, com.destroystokyo.paper.io.PrioritizedTaskQueue.NORMAL_PRIORITY);
          }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index cc9eae37abbf1215c65148bce56455eee7a2c6ce..b9b6d9a0c8ab679216556029251406b07d004144 100644
+index 6df0b49fec090a5c53552c7e277dd7841b9978e0..73b6f38945c50011c551602c6d293a50fad1d9e1 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -950,15 +950,15 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
@@ -1017,7 +1017,7 @@ index 3f45bab0e9f7b3697e6d9d1092a1e6e579f7066f..4f1cf281c4bf68c37982d390da8779de
  
      long getCreatedAt() {
 diff --git a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardManager.java b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardManager.java
-index c74ac9cf5db4d8adfe781cf066258011da469717..73c48bbb3c6ff9de15acb7adaa15f904785ccfef 100644
+index 138407c2d4b0bc55ddb9aac5d2aa3edadda090fb..a6e9e503a496c18e2501b03ec84f4600c134a50c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardManager.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scoreboard/CraftScoreboardManager.java
 @@ -115,7 +115,7 @@ public final class CraftScoreboardManager implements ScoreboardManager {
@@ -1039,7 +1039,7 @@ index c74ac9cf5db4d8adfe781cf066258011da469717..73c48bbb3c6ff9de15acb7adaa15f904
          // Paper end - add timings for scoreboard search
      }
 diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
-index 8643df8d81714edf60eebd6984bac2c933d1fbd6..966e38bec3a1dd76cc0a27f3072fc0e87a5c213c 100644
+index 70b5b307193dc288a6257d90ca96762cb4a8345a..263c7cca836c0afe355abaec949932335e03bf4a 100644
 --- a/src/main/java/org/spigotmc/ActivationRange.java
 +++ b/src/main/java/org/spigotmc/ActivationRange.java
 @@ -169,7 +169,7 @@ public class ActivationRange
@@ -1051,7 +1051,7 @@ index 8643df8d81714edf60eebd6984bac2c933d1fbd6..966e38bec3a1dd76cc0a27f3072fc0e8
          final int miscActivationRange = world.spigotConfig.miscActivationRange;
          final int raiderActivationRange = world.spigotConfig.raiderActivationRange;
          final int animalActivationRange = world.spigotConfig.animalActivationRange;
-@@ -237,7 +237,7 @@ public class ActivationRange
+@@ -238,7 +238,7 @@ public class ActivationRange
              }
              // Paper end
          }

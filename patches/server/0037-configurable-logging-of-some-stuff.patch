@@ -65,7 +65,7 @@ index 429bff1362fde706759f00702d7a9ecc738a687d..4b2b1506eb20da848947f07fb3026e62
  
  
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 5a6e05543ec3c8925a7d98b4e05272d1e26a9aac..86608fa6ca381dbe725edd960ec849e0ff66b8ed 100644
+index bc933eaa16e52de8b592a4685046925398ad23cd..2426dedeab7586331760037df072bad860b8e724 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -659,6 +659,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
@@ -84,7 +84,7 @@ index 5a6e05543ec3c8925a7d98b4e05272d1e26a9aac..86608fa6ca381dbe725edd960ec849e0
                      ServerGamePacketListenerImpl.LOGGER.warn("{} (vehicle of {}) moved wrongly! {}", new Object[]{entity.getName().getString(), this.player.getName().getString(), Math.sqrt(d10)});
                  }
                  Location curPos = this.getCraftPlayer().getLocation(); // Spigot
-@@ -1479,6 +1481,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1483,6 +1485,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
                                  if (d11 - d10 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
                                  // CraftBukkit end
@@ -92,7 +92,7 @@ index 5a6e05543ec3c8925a7d98b4e05272d1e26a9aac..86608fa6ca381dbe725edd960ec849e0
                                      ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d7, d8, d9});
                                      this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                      return;
-@@ -1547,6 +1550,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1551,6 +1554,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
                              if (!this.player.isChangingDimension() && d11 > org.spigotmc.SpigotConfig.movedWronglyThreshold && !this.player.isSleeping() && !this.player.gameMode.isCreative() && this.player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) { // Spigot
                                  flag2 = true; // Paper - diff on change, this should be moved wrongly
@@ -100,11 +100,12 @@ index 5a6e05543ec3c8925a7d98b4e05272d1e26a9aac..86608fa6ca381dbe725edd960ec849e0
                                  ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!", this.player.getName().getString());
                              }
  
-@@ -2560,6 +2564,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
-             return false;
-         } else {
-             if (message.hasExpiredServer(Instant.now())) {
-+                if (com.shinamc.starlivht.StarlivhtConfig.logExpiredChat) // Starlivht
-                 ServerGamePacketListenerImpl.LOGGER.warn("{} sent expired chat: '{}'. Is the client/server system time unsynchronized? c: {} s: {}", this.player.getName().getString(), message.signedContent().plain(), message.timeStamp().getEpochSecond(), Instant.now().getEpochSecond()); // Paper
+@@ -2607,7 +2611,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
              }
+         }
+ 
+-        if (playerchatmessage.hasExpiredServer(Instant.now())) {
++        if (com.shinamc.starlivht.StarlivhtConfig.logExpiredChat && playerchatmessage.hasExpiredServer(Instant.now())) { // Starlivht
+             ServerGamePacketListenerImpl.LOGGER.warn("{} sent expired chat: '{}'. Is the client/server system time unsynchronized? c: {} s: {}", this.player.getName().getString(), playerchatmessage.signedContent().plain(), playerchatmessage.timeStamp().getEpochSecond(), Instant.now().getEpochSecond()); // Paper
+         }
  

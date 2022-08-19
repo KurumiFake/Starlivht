@@ -8,10 +8,10 @@ Original code by ProjectKig, licensed under GPLv3
 You can find the original code on https://github.com/ProjectKig/KigPaper
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 5b543a3f115fc80778db662d8557d12d3bd36942..5a6e05543ec3c8925a7d98b4e05272d1e26a9aac 100644
+index d18b82f1f66cd10250a12222dfb983ef57629738..bc933eaa16e52de8b592a4685046925398ad23cd 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -3461,6 +3461,8 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -3511,6 +3511,8 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
                  this.dropSpamTickCount += 20;
                  this.player.drop(itemstack, true);
              }
